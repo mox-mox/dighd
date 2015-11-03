@@ -35,8 +35,14 @@ _minted-*
 *.log
 *.out
 *.synctex.gz
+*.swp
+*~
 
 
 # Verilog stuff
 INCA_libs/
 *.log
+*.simvision/
+*.key
+*.shm
+
