@@ -26,3 +26,17 @@
 *.exe
 *.out
 *.app
+
+exercise[0-9][0-9].pdf
+exercise\ [0-9].pdf
+*.docx
+_minted-*
+*.aux
+*.log
+*.out
+*.synctex.gz
+
+
+# Verilog stuff
+INCA_libs/
+*.log
