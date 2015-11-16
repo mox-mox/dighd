@@ -21,7 +21,6 @@ module counter_tb();
 			);
 	initial begin
 		reset_n <= 0;
-		//clock <= 1'b0;
 		cnt_en <= 1;
 		cnt_clear <= 0;
 		#100
