@@ -14,6 +14,14 @@ module gearbox (
 	reg[159:0] fifo;
 	reg[3:0] fifo_input_idx;
 	reg[2:0] fifo_output_idx;
+	assign data_out[19:0] = (fifo_output_idx[2:0] == 3'h0) ? fifo[ 19:  0]:
+	                        (fifo_output_idx[2:0] == 3'h1) ? fifo[ 39: 20]:
+	                        (fifo_output_idx[2:0] == 3'h2) ? fifo[ 59: 40]:
+	                        (fifo_output_idx[2:0] == 3'h3) ? fifo[ 79: 60]:
+	                        (fifo_output_idx[2:0] == 3'h4) ? fifo[ 99: 80]:
+	                        (fifo_output_idx[2:0] == 3'h5) ? fifo[119:100]:
+	                        (fifo_output_idx[2:0] == 3'h6) ? fifo[139:120]:
+	                      /*(fifo_output_idx[2:0] == 3'h7)?*/fifo[159:140];
 
 	always @(negedge res_n) begin
 		fifo[159:0]          <= {160{1'b0}};
@@ -45,15 +53,15 @@ module gearbox (
 	always @(posedge clk2) begin
 		if(shift_out && valid_out) begin
 			case(fifo_output_idx[2:0]) // synopsys full_case parallel_case
-				// Valid_set => we HAVE to deliver on demand Increase the read pointer...  Check if the fifo became empty...                                                  Fifo cannot be full after reading.
-				3'h0: begin data_out[19:0] <= fifo[ 19:  0]; fifo_output_idx[2:0] <= 3'h1; if(fifo_input_idx[3:0] == 4'h2                                ) begin valid_out <= 1'b0; end full <=1'b0; end
-				3'h1: begin data_out[19:0] <= fifo[ 39: 20]; fifo_output_idx[2:0] <= 3'h2; if(fifo_input_idx[3:0] == 4'h3                                ) begin valid_out <= 1'b0; end full <=1'b0; end
-				3'h2: begin data_out[19:0] <= fifo[ 59: 40]; fifo_output_idx[2:0] <= 3'h3; if(fifo_input_idx[3:0] == 4'h4                                ) begin valid_out <= 1'b0; end full <=1'b0; end
-				3'h3: begin data_out[19:0] <= fifo[ 79: 60]; fifo_output_idx[2:0] <= 3'h4; if(fifo_input_idx[3:0] == 4'h5 || fifo_input_idx[3:0] == 4'h6 ) begin valid_out <= 1'b0; end full <=1'b0; end
-				3'h4: begin data_out[19:0] <= fifo[ 99: 80]; fifo_output_idx[2:0] <= 3'h5; if(fifo_input_idx[3:0] == 4'h7                                ) begin valid_out <= 1'b0; end full <=1'b0; end
-				3'h5: begin data_out[19:0] <= fifo[119:100]; fifo_output_idx[2:0] <= 3'h6; if(fifo_input_idx[3:0] == 4'h8                                ) begin valid_out <= 1'b0; end full <=1'b0; end
-				3'h6: begin data_out[19:0] <= fifo[139:120]; fifo_output_idx[2:0] <= 3'h7; if(fifo_input_idx[3:0] == 4'h9                                ) begin valid_out <= 1'b0; end full <=1'b0; end
-				3'h7: begin data_out[19:0] <= fifo[159:140]; fifo_output_idx[2:0] <= 3'h0; if(fifo_input_idx[3:0] == 4'h0 || fifo_input_idx[3:0] == 4'h1 ) begin valid_out <= 1'b0; end full <=1'b0; end
+				//          Increase the read pointer...  Check if the fifo became empty...                                                  Fifo cannot be full after reading.
+				3'h0: begin fifo_output_idx[2:0] <= 3'h1; if(fifo_input_idx[3:0] == 4'h2                                ) begin valid_out <= 1'b0; end full <=1'b0; end
+				3'h1: begin fifo_output_idx[2:0] <= 3'h2; if(fifo_input_idx[3:0] == 4'h3                                ) begin valid_out <= 1'b0; end full <=1'b0; end
+				3'h2: begin fifo_output_idx[2:0] <= 3'h3; if(fifo_input_idx[3:0] == 4'h4                                ) begin valid_out <= 1'b0; end full <=1'b0; end
+				3'h3: begin fifo_output_idx[2:0] <= 3'h4; if(fifo_input_idx[3:0] == 4'h5 || fifo_input_idx[3:0] == 4'h6 ) begin valid_out <= 1'b0; end full <=1'b0; end
+				3'h4: begin fifo_output_idx[2:0] <= 3'h5; if(fifo_input_idx[3:0] == 4'h7                                ) begin valid_out <= 1'b0; end full <=1'b0; end
+				3'h5: begin fifo_output_idx[2:0] <= 3'h6; if(fifo_input_idx[3:0] == 4'h8                                ) begin valid_out <= 1'b0; end full <=1'b0; end
+				3'h6: begin fifo_output_idx[2:0] <= 3'h7; if(fifo_input_idx[3:0] == 4'h9                                ) begin valid_out <= 1'b0; end full <=1'b0; end
+				3'h7: begin fifo_output_idx[2:0] <= 3'h0; if(fifo_input_idx[3:0] == 4'h0 || fifo_input_idx[3:0] == 4'h1 ) begin valid_out <= 1'b0; end full <=1'b0; end
 			endcase
 		end
 	end
