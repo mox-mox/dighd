@@ -15,48 +15,6 @@ module lfsr (
 	reg[3:0] fifo_input_idx;
 	reg[2:0] fifo_output_idx;
 
-	task FILL_FIFO;
-		input [15:0] new_data;
-		input [3:0] write_index;
-		inout [159:0] buffer;
-		begin
-			case(write_index[3:0])// synopsys full_case
-				4'h0: buffer[ 15:  0] <= new_data[15:0];
-				4'h1: buffer[ 31: 16] <= new_data[15:0];
-				4'h2: buffer[ 47: 32] <= new_data[15:0];
-				4'h3: buffer[ 63: 48] <= new_data[15:0];
-				4'h4: buffer[ 79: 64] <= new_data[15:0];
-				4'h5: buffer[ 95: 80] <= new_data[15:0];
-				4'h6: buffer[111: 96] <= new_data[15:0];
-				4'h7: buffer[127:112] <= new_data[15:0];
-				4'h8: buffer[143:128] <= new_data[15:0];
-				4'h9: buffer[159:144] <= new_data[15:0];
-			endcase
-		end
-	end
-
-	task OUTPUT_FIFO;
-		input [159:0] buffer;
-		input [2:0] read_index;
-		inout [19:0] output_data;
-		begin
-			case(write_index[3:0])// synopsys full_case
-				'h0: buffer[15:0] <= new_data[ 15:  0];
-				'h1: buffer[15:0] <= new_data[ 31: 16];
-				'h2: buffer[15:0] <= new_data[ 47: 32];
-				'h3: buffer[15:0] <= new_data[ 63: 48];
-				'h4: buffer[15:0] <= new_data[ 79: 64];
-				'h5: buffer[15:0] <= new_data[ 95: 80];
-				'h6: buffer[15:0] <= new_data[111: 96];
-				'h7: buffer[15:0] <= new_data[127:112];
-			endcase
-		end
-	end
-
-
-
-
-
 	always @(negedge res_n) begin
 		fifo[159:0]          <= {160{1'b0}};
 		fifo_input_idx[3:0]  <= {4{1'b0}};
@@ -66,31 +24,42 @@ module lfsr (
 	end
 
 	always @(posedge clk1) begin
-		if(shift_in && !full)
-		begin
+		if(shift_in && !full) begin
 			case(fifo_input_idx[3:0]) // synopsys full_case parallel_case
-				4'h0: if (output_idx[2:0] != 3'b001 || !valid_out) fifo[ 15:  0] <= data_in[15:0];
-				4'h1: if (output_idx[2:0] != 3'b001 || !valid_out) fifo[ 31: 16] <= data_in[15:0];
-				4'h2: if (output_idx[2:0] != 3'b001 || !valid_out) fifo[ 47: 32] <= data_in[15:0];
-				4'h3: if (output_idx[2:0] != 3'b001 || !valid_out) fifo[ 63: 48] <= data_in[15:0];
-				4'h4: if (output_idx[2:0] != 3'b001 || !valid_out) fifo[ 79: 64] <= data_in[15:0];
-				4'h5: if (output_idx[2:0] != 3'b001 || !valid_out) fifo[ 95: 80] <= data_in[15:0];
-				4'h6: if (output_idx[2:0] != 3'b001 || !valid_out) fifo[111: 96] <= data_in[15:0];
-				4'h7: if (output_idx[2:0] != 3'b001 || !valid_out) fifo[127:112] <= data_in[15:0];
-				4'h8: if (output_idx[2:0] != 3'b001 || !valid_out) fifo[143:128] <= data_in[15:0];
-				4'h9: if (output_idx[2:0] != 3'b001 || !valid_out) fifo[159:144] <= data_in[15:0];
+				4'h0: if(output_idx[2:0] != 3'h0 || !valid_out) begin fifo[ 15:  0] <= data_in[15:0]; fifo_input_idx[3:0] <= 4'h1; if(output_idx[2:0] == 3'h1) begin full <= 1'b1; end                    end
+				4'h1: if(output_idx[2:0] != 3'h1 || !valid_out) begin fifo[ 31: 16] <= data_in[15:0]; fifo_input_idx[3:0] <= 4'h2; if(output_idx[2:0] == 3'h2) begin full <= 1'b1; end valid_out <= 1'b1; end
+				4'h2: if(output_idx[2:0] != 3'h2 || !valid_out) begin fifo[ 47: 32] <= data_in[15:0]; fifo_input_idx[3:0] <= 4'h3; if(output_idx[2:0] == 3'h3) begin full <= 1'b1; end valid_out <= 1'b1; end
+				4'h3: if(output_idx[2:0] != 3'h3 || !valid_out) begin fifo[ 63: 48] <= data_in[15:0]; fifo_input_idx[3:0] <= 4'h4;                                                     valid_out <= 1'b1; end
+				4'h4: if(output_idx[2:0] != 3'h4 || !valid_out) begin fifo[ 79: 64] <= data_in[15:0]; fifo_input_idx[3:0] <= 4'h5; if(output_idx[2:0] == 3'h4) begin full <= 1'b1; end valid_out <= 1'b1; end
+				4'h5: if(output_idx[2:0] != 3'h1 || !valid_out) begin fifo[ 95: 80] <= data_in[15:0]; fifo_input_idx[3:0] <= 4'h6; if(output_idx[2:0] == 3'h5) begin full <= 1'b1; end                    end
+				4'h6: if(output_idx[2:0] != 3'h1 || !valid_out) begin fifo[111: 96] <= data_in[15:0]; fifo_input_idx[3:0] <= 4'h7; if(output_idx[2:0] == 3'h6) begin full <= 1'b1; end valid_out <= 1'b1; end
+				4'h7: if(output_idx[2:0] != 3'h1 || !valid_out) begin fifo[127:112] <= data_in[15:0]; fifo_input_idx[3:0] <= 4'h8; if(output_idx[2:0] == 3'h7) begin full <= 1'b1; end valid_out <= 1'b1; end
+				4'h8: if(output_idx[2:0] != 3'h1 || !valid_out) begin fifo[143:128] <= data_in[15:0]; fifo_input_idx[3:0] <= 4'h9;                                                     valid_out <= 1'b1; end
+				4'h9: if(output_idx[2:0] != 3'h1 || !valid_out) begin fifo[159:144] <= data_in[15:0]; fifo_input_idx[3:0] <= 4'h0; if(output_idx[2:0] == 3'h8) begin full <= 1'b1; end valid_out <= 1'b1; end
 				default:
 					$display("(EE): Gearbox write index reached unexpected value.");
+			endcase
+		end
+		else
+			$display("(EE): Trying to push stuff into the Gearbox while it was full.");
+	end
+	always @(posedge clk2) begin
+		if(shift_out && valid_out) begin
+			case(fifo_output_idx[2:0]) // synopsys full_case parallel_case
+				// Valid_set -> we have to deliver on demand      increase the read pointer    Check if the fifo became empty...         The fifo cannot be full after reading.
+				3'h0: begin data_out[19:0] <= new_data[ 19:  0]; fifo_output_idx[2:0] <= 3'h1; if(input_idx[3:0] == 4'h0) begin valid_out <= 1'b0; end full <=1'b1; end
+				3'h1: begin data_out[19:0] <= new_data[ 39: 20]; fifo_output_idx[2:0] <= 3'h2; if(input_idx[3:0] == 4'h0) begin valid_out <= 1'b0; end full <=1'b1; end
+				3'h2: begin data_out[19:0] <= new_data[ 59: 40]; fifo_output_idx[2:0] <= 3'h3; if(input_idx[3:0] == 4'h0) begin valid_out <= 1'b0; end full <=1'b1; end
+				3'h3: begin data_out[19:0] <= new_data[ 79: 60]; fifo_output_idx[2:0] <= 3'h4; if(input_idx[3:0] == 4'h0) begin valid_out <= 1'b0; end full <=1'b1; end
+				3'h4: begin data_out[19:0] <= new_data[ 99: 80]; fifo_output_idx[2:0] <= 3'h5; if(input_idx[3:0] == 4'h0) begin valid_out <= 1'b0; end full <=1'b1; end
+				3'h5: begin data_out[19:0] <= new_data[119:100]; fifo_output_idx[2:0] <= 3'h6; if(input_idx[3:0] == 4'h0) begin valid_out <= 1'b0; end full <=1'b1; end
+				3'h6: begin data_out[19:0] <= new_data[139:120]; fifo_output_idx[2:0] <= 3'h7; if(input_idx[3:0] == 4'h0) begin valid_out <= 1'b0; end full <=1'b1; end
+				3'h7: begin data_out[19:0] <= new_data[159:140]; fifo_output_idx[2:0] <= 3'h0; if(input_idx[3:0] == 4'h0) begin valid_out <= 1'b0; end full <=1'b1; end
 			endcase
 		end
 
 
 
-		if(shift_in && !full && (!valid_out || (fifo_input_idx[3:0]...)) begin
-
-
-		end
-	end
 
 
 
@@ -98,18 +67,5 @@ module lfsr (
 
 
 
-
-
-	always @(posedge clk1 or negedge res_n) begin
-		//$display ("lfsr data: %B", data[width-1:0]);
-		if(res_n == 1'b0 || clear == 1'b1) begin
-			data<={1'b1,{width-1{1'b0}}};
-		end else if (enable == 1'b1) begin
-			data[0] <= data[width-1];
-			for(i=1; i!=width; i = i+1) begin
-				data[i] <= polynomial[i] ? data[i-1]^data[width-1] : data[i-1];
-			end
-		end
-	end
 endmodule
 
