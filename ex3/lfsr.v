@@ -12,7 +12,7 @@ module lfsr #(parameter width=32, parameter [width-1:0] polynomial={width{1'b0}}
 	always @(posedge clk or negedge res_n) begin
 		//$display ("lfsr data: %B", data[width-1:0]);
 		if(res_n == 1'b0 || clear == 1'b1) begin
-			data<={1'b1,{width-1{1'b0}}};
+			data<={1'b1,{width-1{1'b1}}};
 		end else if (enable == 1'b1) begin
 			data[0] <= data[width-1];
 			for(i=1; i!=width; i = i+1) begin

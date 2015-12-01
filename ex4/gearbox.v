@@ -1,10 +1,10 @@
+`default_nettype none
 module gearbox (
 	            input wire clk1,
                 input wire res_n,
                 output reg full,
                 input wire shift_in,
                 input wire[15:0] data_in,
-
 			    input wire clk2,
 			    output reg valid_out, // Also: Empty signal
 			    input wire shift_out,
@@ -32,7 +32,10 @@ module gearbox (
 	end
 
 	always @(posedge clk1) begin
+		//$display("(II): %m: input_idx = %2d", fifo_input_idx[3:0]);
 		if(shift_in && !full) begin
+			//$display("(II): %m: (shift_in && !full), valid_out = %b", valid_out);
+			$display("(II): %m: Writing.");
 			case(fifo_input_idx[3:0]) // synopsys full_case parallel_case
 				// If there is space and new data, fill the fifo...                                        Increase write pointer...    Detect if the fifo is full...                       Fifo cannot be empty after writing.
 				4'h0: if(fifo_output_idx[2:0] != 3'h0 || !valid_out) begin fifo[ 15:  0] <= data_in[15:0]; fifo_input_idx[3:0] <= 4'h1; if(fifo_output_idx[2:0] == 3'h1) begin full <= 1'b1; end                    end
@@ -51,7 +54,9 @@ module gearbox (
 		end
 	end
 	always @(posedge clk2) begin
+		//$display("(II): %m: output_idx=%2d, shift_out=%b, valid_out=%b", fifo_output_idx[2:0], shift_out, valid_out);
 		if(shift_out && valid_out) begin
+			$display("(II): %m: Updating read pointer.");
 			case(fifo_output_idx[2:0]) // synopsys full_case parallel_case
 				//          Increase the read pointer...  Check if the fifo became empty...                                                  Fifo cannot be full after reading.
 				3'h0: begin fifo_output_idx[2:0] <= 3'h1; if(fifo_input_idx[3:0] == 4'h2                                ) begin valid_out <= 1'b0; end full <=1'b0; end
