@@ -1,0 +1,87 @@
+*** Message Type: info ***
+When: Tue Nov 17 01:37:18 AM CET 2015
+SimVision started.
+Version: TOOL:  simvision       15.10-s002
+User: hwsimu03
+Host: creek06.ziti.uni-heidelberg.de
+Platform: Linux/x86_64/3.8.0-44-generic
+Started: Tue Nov 17 01:37:18 AM CET 2015
+Command: /opt0/eda/cadence/INCISIVE151/tools.lnx86/simvision/bin/simvision.exe -connect dc:creek06.ziti.uni-heidelberg.de:50084 -nocopyright
+Work Directory: /home/hwsimu03/dighd/ex3
+ 
+*** Message Type: info ***
+When: Tue Nov 17 01:37:26 AM CET 2015
+Create browser window: "Design Browser 1"
+ 
+*** Message Type: info ***
+When: Tue Nov 17 01:38:49 AM CET 2015
+Create console window: "Console"
+ 
+*** Message Type: info ***
+When: Tue Nov 17 01:39:16 AM CET 2015
+Connect to Simulator
+      Design: worklib.lfsr_tb:v
+   Languages: verilog
+   Simulator: NC-Sim
+     Version: TOOL:  ncsim   15.10-s002
+        User: hwsimu03
+        Host: creek06.ziti.uni-heidelberg.de
+Time Started: Tue Nov 17 01:36:56 AM CET 2015
+  Process ID: 21189
+   Directory: /home/hwsimu03/dighd/ex3
+     Command: irun -access +rwc -gui clk_out.v lfsr_tb.v lfsr.v
+
+ 
+*** Message Type: info ***
+When: Tue Nov 17 01:39:17 AM CET 2015
+Create utility window: "Properties"
+ 
+*** Message Type: info ***
+When: Tue Nov 17 01:42:16 AM CET 2015
+Create waveform window: "Waveform 1"
+ 
+*** Message Type: info ***
+When: Tue Nov 17 01:45:20 AM CET 2015
+Create source window: "Source Browser 1"
+ 
+*** Message Type: info ***
+When: Tue Nov 17 01:47:00 AM CET 2015
+Delete waveform window: "Waveform 1"
+ 
+*** Message Type: info ***
+When: Tue Nov 17 01:47:00 AM CET 2015
+Delete browser window: "Design Browser 1"
+ 
+*** Message Type: error ***
+When: Tue Nov 17 01:47:57 AM CET 2015
+invalid command name "::timeaxis3"
+    while executing
+"$_timeaxis convert t2exp $time"
+    (method "::WaveWindow::seeTime" body line 2)
+    invoked from within
+"seeTime [$itk_option(-markerdata) marker cget  $itk_option(-markerprimary) -time]"
+    (method "::WaveWindow::_doGotoCause" body line 55)
+    invoked from within
+"_doGotoCause $cnode"
+    ("@goto-cause" arm line 2)
+    invoked from within
+"switch -glob -- $dclickpref {
+       @no-action {
+               # Do nothing
+       }
+            @goto-cause {
+                _doGotoCause $cnode
+            }
+           ..."
+    (method "::WaveWindow::_moveCursor" body line 337)
+    invoked from within
+"::.waveWindow0 _moveCursor cursor 317 154 -double"
+    (in namespace inscope "::WaveWindow" script line 1)
+    invoked from within
+"namespace inscope ::WaveWindow {::.waveWindow0 _moveCursor cursor 317 154 -double}"
+    (command bound to event)
+ 
+*** Message Type: info ***
+When: Tue Nov 17 01:48:04 AM CET 2015
+SimVision Exit.
+ 

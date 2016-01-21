@@ -1,0 +1,245 @@
+# SimVision Command Script (Tue Jan 19 11:33:45 AM CET 2016)
+#
+# Version 15.10.s002
+#
+# You can restore this configuration with:
+#
+#      irun -access +rwc register_stage.v lfsr.v lfsr_tb.v -s -input restore.tcl
+#
+
+
+#
+# Preferences
+#
+preferences set toolbar-Standard-WatchWindow {
+  usual
+  shown 0
+}
+preferences set plugin-enable-svdatabrowser-new 1
+preferences set cursorctl-dont-show-sync-warning 1
+preferences set toolbar-Windows-WatchWindow {
+  usual
+  shown 0
+}
+preferences set plugin-enable-groupscope 0
+preferences set plugin-enable-interleaveandcompare 0
+preferences set plugin-enable-waveformfrequencyplot 0
+preferences set toolbar-SimControl-WatchWindow {
+  usual
+  shown 0
+}
+preferences set whats-new-dont-show-at-startup 1
+preferences set toolbar-TimeSearch-WatchWindow {
+  usual
+  shown 0
+}
+
+#
+# Simulator
+#
+database require simulator -hints {
+	simulator "irun -access +rwc register_stage.v lfsr.v lfsr_tb.v -gui -s -input restore.tcl"
+}
+
+#
+# Mnemonic Maps
+#
+mmap new -reuse -name {Boolean as Logic} -radix %b -contents {{%c=FALSE -edgepriority 1 -shape low}
+{%c=TRUE -edgepriority 1 -shape high}}
+mmap new -reuse -name {Example Map} -radix %x -contents {{%b=11???? -bgcolor orange -label REG:%x -linecolor yellow -shape bus}
+{%x=1F -bgcolor red -label ERROR -linecolor white -shape EVENT}
+{%x=2C -bgcolor red -label ERROR -linecolor white -shape EVENT}
+{%x=* -label %x -linecolor gray -shape bus}}
+
+#
+# Design Browser windows
+#
+if {[catch {window new WatchList -name "Design Browser 1" -geometry 1600x886+0+14}] != ""} {
+    window geometry "Design Browser 1" 1600x886+0+14
+}
+window target "Design Browser 1" on
+browser using {Design Browser 1}
+browser set -scope [subst  {simulator::[format {lfsr_tb.lfsr_I.rs2_I}]} ]
+browser set \
+    -signalsort name
+browser yview see [subst  {simulator::[format {lfsr_tb.lfsr_I.rs2_I}]} ]
+browser timecontrol set -lock 0
+
+#
+# Waveform windows
+#
+if {[catch {window new WaveWindow -name "Waveform 1" -geometry 1600x886+0+14}] != ""} {
+    window geometry "Waveform 1" 1600x886+0+14
+}
+window target "Waveform 1" on
+waveform using {Waveform 1}
+waveform sidebar visibility partial
+waveform set \
+    -primarycursor TimeA \
+    -signalnames name \
+    -signalwidth 175 \
+    -units ns \
+    -valuewidth 75
+waveform baseline set -time 0
+
+set id [waveform add -signals [subst  {
+	{simulator::[format {lfsr_tb.clear}]}
+	} ]]
+waveform format $id -bgcolor #999999
+set id [waveform add -signals [subst  {
+	{simulator::[format {lfsr_tb.clk}]}
+	} ]]
+waveform format $id -bgcolor #999999
+set id [waveform add -signals [subst  {
+	{simulator::[format {lfsr_tb.d_out}]}
+	} ]]
+waveform format $id -bgcolor #999999
+set id [waveform add -signals [subst  {
+	{simulator::[format {lfsr_tb.enable}]}
+	} ]]
+waveform format $id -bgcolor #999999
+set id [waveform add -signals [subst  {
+	{simulator::[format {lfsr_tb.res_n}]}
+	} ]]
+waveform format $id -bgcolor #999999
+set id [waveform add -signals [subst  {
+	{simulator::[format {lfsr_tb.lfsr_I.clear}]}
+	} ]]
+waveform format $id -bgcolor #000000
+set id [waveform add -signals [subst  {
+	{simulator::[format {lfsr_tb.lfsr_I.clk}]}
+	} ]]
+waveform format $id -bgcolor #000000
+set id [waveform add -signals [subst  {
+	{simulator::[format {lfsr_tb.lfsr_I.d_out}]}
+	} ]]
+waveform format $id -bgcolor #000000
+set id [waveform add -signals [subst  {
+	{simulator::[format {lfsr_tb.lfsr_I.enable}]}
+	} ]]
+waveform format $id -bgcolor #000000
+set id [waveform add -signals [subst  {
+	{simulator::[format {lfsr_tb.lfsr_I.feedback}]}
+	} ]]
+waveform format $id -bgcolor #000000
+set id [waveform add -signals [subst  {
+	{simulator::[format {lfsr_tb.lfsr_I.out0}]}
+	} ]]
+waveform format $id -bgcolor #000000
+set id [waveform add -signals [subst  {
+	{simulator::[format {lfsr_tb.lfsr_I.out1}]}
+	} ]]
+waveform format $id -bgcolor #000000
+set id [waveform add -signals [subst  {
+	{simulator::[format {lfsr_tb.lfsr_I.polynomial[3:0]}]}
+	} ]]
+waveform format $id -bgcolor #000000
+set id [waveform add -signals [subst  {
+	{simulator::[format {lfsr_tb.lfsr_I.res_n}]}
+	} ]]
+waveform format $id -bgcolor #000000
+set id [waveform add -signals [subst  {
+	{simulator::[format {lfsr_tb.lfsr_I.width}]}
+	} ]]
+waveform format $id -bgcolor #000000
+set id [waveform add -signals [subst  {
+	{simulator::[format {lfsr_tb.lfsr_I.rs0_I.clk}]}
+	} ]]
+waveform format $id -color #0000ff -bgcolor #999999
+set id [waveform add -signals [subst  {
+	{simulator::[format {lfsr_tb.lfsr_I.rs0_I.data}]}
+	} ]]
+waveform format $id -color #0000ff -bgcolor #999999
+set id [waveform add -signals [subst  {
+	{simulator::[format {lfsr_tb.lfsr_I.rs0_I.feedback}]}
+	} ]]
+waveform format $id -color #0000ff -bgcolor #999999
+set id [waveform add -signals [subst  {
+	{simulator::[format {lfsr_tb.lfsr_I.rs0_I.forward}]}
+	} ]]
+waveform format $id -color #0000ff -bgcolor #999999
+set id [waveform add -signals [subst  {
+	{simulator::[format {lfsr_tb.lfsr_I.rs0_I.out}]}
+	} ]]
+waveform format $id -color #0000ff -bgcolor #999999
+set id [waveform add -signals [subst  {
+	{simulator::[format {lfsr_tb.lfsr_I.rs0_I.res_n}]}
+	} ]]
+waveform format $id -color #0000ff -bgcolor #999999
+set id [waveform add -signals [subst  {
+	{simulator::[format {lfsr_tb.lfsr_I.rs0_I.with_xor}]}
+	} ]]
+waveform format $id -bgcolor #999999
+set id [waveform add -signals [subst  {
+	{simulator::[format {lfsr_tb.lfsr_I.rs1_I.clk}]}
+	} ]]
+waveform format $id -bgcolor #000000
+set id [waveform add -signals [subst  {
+	{simulator::[format {lfsr_tb.lfsr_I.rs1_I.data}]}
+	} ]]
+waveform format $id -bgcolor #000000
+set id [waveform add -signals [subst  {
+	{simulator::[format {lfsr_tb.lfsr_I.rs1_I.feedback}]}
+	} ]]
+waveform format $id -bgcolor #000000
+set id [waveform add -signals [subst  {
+	{simulator::[format {lfsr_tb.lfsr_I.rs1_I.forward}]}
+	} ]]
+waveform format $id -bgcolor #000000
+set id [waveform add -signals [subst  {
+	{simulator::[format {lfsr_tb.lfsr_I.rs1_I.out}]}
+	} ]]
+waveform format $id -bgcolor #000000
+set id [waveform add -signals [subst  {
+	{simulator::[format {lfsr_tb.lfsr_I.rs1_I.res_n}]}
+	} ]]
+waveform format $id -bgcolor #000000
+set id [waveform add -signals [subst  {
+	{simulator::[format {lfsr_tb.lfsr_I.rs1_I.with_xor}]}
+	} ]]
+waveform format $id -bgcolor #000000
+set id [waveform add -signals [subst  {
+	{simulator::[format {lfsr_tb.lfsr_I.rs2_I.clk}]}
+	} ]]
+waveform format $id -bgcolor #999999
+set id [waveform add -signals [subst  {
+	{simulator::[format {lfsr_tb.lfsr_I.rs2_I.data}]}
+	} ]]
+waveform format $id -bgcolor #999999
+set id [waveform add -signals [subst  {
+	{simulator::[format {lfsr_tb.lfsr_I.rs2_I.feedback}]}
+	} ]]
+waveform format $id -bgcolor #999999
+set id [waveform add -signals [subst  {
+	{simulator::[format {lfsr_tb.lfsr_I.rs2_I.forward}]}
+	} ]]
+waveform format $id -bgcolor #999999
+set id [waveform add -signals [subst  {
+	{simulator::[format {lfsr_tb.lfsr_I.rs2_I.out}]}
+	} ]]
+waveform format $id -bgcolor #999999
+set id [waveform add -signals [subst  {
+	{simulator::[format {lfsr_tb.lfsr_I.rs2_I.res_n}]}
+	} ]]
+waveform format $id -bgcolor #999999
+set id [waveform add -signals [subst  {
+	{simulator::[format {lfsr_tb.lfsr_I.rs2_I.with_xor}]}
+	} ]]
+waveform format $id -bgcolor #999999
+
+waveform xview limits 0 35ns
+
+#
+# Waveform Window Links
+#
+
+#
+# Console windows
+#
+console set -windowname Console
+window geometry Console 1600x886+0+14
+
+#
+# Layout selection
+#
+

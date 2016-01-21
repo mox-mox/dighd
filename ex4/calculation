@@ -1,0 +1,7 @@
+# Sender: 16bit @ 400MHz
+*>> MHz=1000000; clk16=400*MHz, bitrate16=16*clk16, bitrate20=bitrate16; clk20=bitrate20/20
+clk16 =  400000000
+bitrate16 =    6.4000e+09
+clk20 =  320000000
+# => Receiver: 20bit @ 320MHz
+

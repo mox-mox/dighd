@@ -4,7 +4,7 @@
 module lfsr_tb();
 
 	parameter TESTSTEPS = 100;
-	//parameter COUNTERWIDTH = 32; // Must be at least log2(TESTSTEPS)
+	parameter COUNTERWIDTH = 32; // Must be at least log2(TESTSTEPS)
 
 	wire clock;
 	wire shifter_data;
@@ -12,7 +12,7 @@ module lfsr_tb();
 	reg cnt_en;
 	reg shift_en;
 	reg cnt_clear;
-	//wire [COUNTERWIDTH-1:0] simulation_step;
+	wire [COUNTERWIDTH-1:0] simulation_step;
 	reg one;
 
 
@@ -26,14 +26,16 @@ module lfsr_tb();
 
 	clk_out clock_I(.clk(clock));
 
-	//counter #(.width(COUNTERWIDTH)) counter_I(
-	//		                       .clk(clock),
-	//		                       .res_n(reset_n),
-	//		                       .enable(cnt_en),
-	//		                       .clear(cnt_clear),
-	//		                       .cnt_out(simulation_step)
-	//		                      );
-	lfsr #(.width(57), .polynomial(57'b1000000000001001000000010000000000000000000000100000000001)) lfsr_I(
+	counter #(.width(COUNTERWIDTH)) counter_I(
+			                       .clk(clock),
+			                       .res_n(reset_n),
+			                       .enable(cnt_en),
+			                       .clear(cnt_clear),
+			                       .cnt_out(simulation_step)
+			                      );
+	//lfsr #(.width(57), .polynomial(57'b000000000010000000000000000000000100000001001000000000000)) lfsr_I(
+	lfsr #(.width(57), .polynomial(57'b0000000000001001000000010000000000000000000000100000000000)) lfsr_I(
+	//lfsr #(.width(10), .polynomial(10'b0000100000)) lfsr_I( // 10-bit example
 	                                                     .clk(clock),
 	                                                     .res_n(reset_n),
 	                                                     .enable(shift_en),

@@ -1,0 +1,54 @@
+s1(18Jan2016:01:06:58):  irun -access +rwc register_stage_tb.v register_stage.v 
+s2(18Jan2016:01:07:28):  irun -access +rwc register_stage_tb.v register_stage.v 
+s3(18Jan2016:01:08:13):  irun -access +rwc register_stage_tb.v register_stage.v 
+s4(18Jan2016:01:09:39):  irun -access +rwc register_stage_tb.v register_stage.v 
+s5(18Jan2016:01:10:00):  irun -access +rwc register_stage_tb.v register_stage.v 
+s6(18Jan2016:01:12:29):  irun -access +rwc register_stage_tb.v register_stage.v 
+s7(18Jan2016:01:12:51):  irun -access +rwc register_stage_tb.v register_stage.v 
+s8(18Jan2016:01:14:52):  irun -access +rwc register_stage_tb.v register_stage.v 
+s9(18Jan2016:01:15:06):  irun -access +rwc register_stage_tb.v register_stage.v 
+s10(18Jan2016:01:16:36):  irun -access +rwc register_stage_tb.v register_stage.v 
+s11(18Jan2016:01:16:54):  irun -access +rwc register_stage_tb.v register_stage.v 
+s12(18Jan2016:01:18:44):  irun -access +rwc register_stage_tb.v register_stage.v 
+s13(18Jan2016:01:19:40):  irun -access +rwc register_stage_tb.v register_stage.v 
+s14(18Jan2016:01:23:15):  irun -access +rwc register_stage_tb.v register_stage.v 
+s15(18Jan2016:01:23:59):  irun -access +rwc register_stage_tb.v register_stage.v 
+s16(18Jan2016:01:25:24):  irun -access +rwc register_stage_tb_no_xor.v register_stage.v 
+s17(18Jan2016:01:25:36):  irun -access +rwc register_stage_tb_no_xor.v register_stage.v 
+s18(18Jan2016:01:25:43):  irun -access +rwc register_stage_tb_with_xor.v register_stage.v 
+s19(18Jan2016:02:48:45):  irun -access +rwc register_stage.v lfsr.v lfsr_tb.v 
+s20(18Jan2016:02:49:31):  irun -access +rwc register_stage.v lfsr.v lfsr_tb.v 
+s21(18Jan2016:02:50:15):  irun -access +rwc register_stage.v lfsr.v lfsr_tb.v 
+s22(18Jan2016:02:51:36):  irun -access +rwc register_stage.v lfsr.v lfsr_tb.v 
+s23(18Jan2016:02:51:55):  irun -access +rwc register_stage.v lfsr.v lfsr_tb.v 
+s24(18Jan2016:02:54:04):  irun -access +rwc register_stage.v lfsr.v lfsr_tb.v 
+s25(18Jan2016:02:55:07):  irun -access +rwc register_stage.v lfsr.v lfsr_tb.v -gui 
+s26(19Jan2016:02:31:07):  irun -access +rwc register_stage.v lfsr.v lfsr_tb.v -gui 
+s27(19Jan2016:02:48:17):  irun -access +rwc register_stage.v lfsr.v lfsr_tb.v -gui -s  
+s28(19Jan2016:02:49:27):  irun -access +rwc register_stage.v lfsr.v lfsr_tb.v -gui -s 
+s29(19Jan2016:02:49:44):  irun -access +rwc register_stage.v lfsr.v lfsr_tb.v -gui -s 
+s30(19Jan2016:02:50:04):  irun -access +rwc register_stage.v lfsr.v lfsr_tb.v -gui -s 
+s31(19Jan2016:02:51:13):  irun -access +rwc register_stage.v lfsr.v lfsr_tb.v -gui -s 
+s32(19Jan2016:11:17:05):  irun -access +rwc register_stage.v lfsr.v lfsr_tb.v -gui 
+s33(19Jan2016:11:24:21):  irun -access +rwc register_stage.v lfsr.v lfsr_tb.v -gui -s  
+s34(19Jan2016:11:26:00):  irun -access +rwc register_stage.v lfsr.v lfsr_tb.v -gui -s 
+s35(19Jan2016:11:27:57):  irun -access +rwc register_stage.v lfsr.v lfsr_tb.v -gui -s 
+s36(19Jan2016:11:28:48):  irun -access +rwc register_stage.v lfsr.v lfsr_tb.v -gui -s 
+s37(19Jan2016:11:29:33):  irun -access +rwc register_stage.v lfsr.v lfsr_tb.v -gui -s 
+s38(19Jan2016:11:30:25):  irun -access +rwc register_stage.v lfsr.v lfsr_tb.v 
+s39(19Jan2016:11:33:56):  irun -access +rwc register_stage.v lfsr.v lfsr_tb.v 
+s40(19Jan2016:11:49:57):  irun -access +rwc register_stage.v lfsr.v lfsr_tb.v 
+s41(19Jan2016:11:50:08):  irun -access +rwc register_stage.v lfsr.v lfsr_tb.v 
+s42(19Jan2016:11:50:43):  irun -access +rwc register_stage.v lfsr.v lfsr_tb.v 
+s43(19Jan2016:11:52:01):  irun -access +rwc register_stage.v lfsr.v lfsr_tb.v -s -input restore.tcl 
+s44(19Jan2016:11:53:18):  irun -access +rwc register_stage.v lfsr.v lfsr_tb.v -gui 
+s45(19Jan2016:11:56:22):  irun -access +rwc register_stage.v lfsr.v lfsr_tb.v -gui -s  
+s46(19Jan2016:11:58:00):  irun -access +rwc register_stage.v lfsr.v lfsr_tb.v -gui -s 
+s47(19Jan2016:11:58:59):  irun -access +rwc register_stage.v lfsr.v lfsr_tb.v 
+s48(19Jan2016:12:02:58):  irun -access +rwc register_stage.v lfsr.v lfsr_tb.v -gui -s 
+s49(19Jan2016:12:03:13):  irun -access +rwc register_stage.v lfsr.v lfsr_tb.v 
+s50(19Jan2016:12:21:43):  irun -access +rwc register_stage.v lfsr.v lfsr_tb_complex.v -gui -s 
+s51(19Jan2016:12:22:02):  irun -access +rwc register_stage.v lfsr.v lfsr_tb_complex.v -gui -s 
+s52(19Jan2016:12:22:35):  irun -access +rwc register_stage.v lfsr.v lfsr_tb_complex.v -gui -s 
+s53(19Jan2016:12:23:23):  irun -access +rwc register_stage.v lfsr.v lfsr_tb_complex.v -gui -s 
+s54(19Jan2016:12:23:36):  irun -access +rwc register_stage.v lfsr.v lfsr_tb_complex.v 

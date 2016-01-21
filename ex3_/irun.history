@@ -1,0 +1,123 @@
+s1(16Nov2015:17:15:37):  irun -access +rwc lfsr.v 
+s2(16Nov2015:17:17:43):  irun -access +rwc lfsr.v 
+s3(16Nov2015:17:20:18):  irun -access +rwc lfsr.v 
+s4(16Nov2015:17:20:32):  irun -access +rwc lfsr.v 
+s5(16Nov2015:17:21:00):  irun -access +rwc lfsr.v 
+s6(16Nov2015:17:21:25):  irun -access +rwc lfsr.v 
+s7(16Nov2015:17:22:25):  irun -access +rwc lfsr.v 
+s8(16Nov2015:17:26:20):  irun -access +rwc lfsr.v 
+s9(16Nov2015:17:28:31):  irun -access +rwc lfsr.v 
+s10(16Nov2015:17:28:53):  irun -access +rwc lfsr.v 
+s11(16Nov2015:17:29:14):  irun --help 
+s12(16Nov2015:17:30:04):  irun -access +rwc -elaborate lfsr.v 
+s13(16Nov2015:17:31:32):  irun -access +rwc lfsr.v 
+s14(16Nov2015:17:31:54):  irun -access +rwc lfsr.v 
+s15(16Nov2015:17:32:39):  irun -access +rwc lfsr.v 
+s16(16Nov2015:17:33:05):  irun -access +rwc lfsr.v 
+s17(16Nov2015:17:33:43):  irun -access +rwc lfsr.v 
+s18(16Nov2015:17:35:08):  irun -access +rwc lfsr.v 
+s19(16Nov2015:17:37:41):  irun -access +rwc lfsr.v 
+s20(16Nov2015:17:38:06):  irun -access +rwc lfsr.v 
+s21(16Nov2015:17:38:22):  irun -access +rwc lfsr.v 
+s22(16Nov2015:17:39:32):  irun -access +rwc lfsr.v 
+s23(16Nov2015:17:39:41):  irun -access +rwc lfsr.v 
+s24(16Nov2015:22:58:12):  irun -access +rwc lfsr.v 
+s25(16Nov2015:23:04:51):  irun -access +rwc lfsr.v 
+s26(16Nov2015:23:11:40):  irun -access +rwc lfsr.v 
+s27(16Nov2015:23:15:41):  irun -access +rwc lfsr.v 
+s28(16Nov2015:23:15:58):  irun -access +rwc lfsr.v 
+s29(16Nov2015:23:16:15):  irun -access +rwc lfsr.v 
+s30(16Nov2015:23:32:03):  irun -access +rwc lfsr.v 
+s31(17Nov2015:01:00:51):  irun -access +rwc clk_out.v lfsr.v lfsr_tb.v 
+s32(17Nov2015:01:02:17):  irun -access +rwc clk_out.v lfsr.v lfsr_tb.v 
+s33(17Nov2015:01:03:05):  irun -access +rwc clk_out.v lfsr.v lfsr_tb.v 
+s34(17Nov2015:01:03:23):  irun -access +rwc clk_out.v lfsr.v lfsr_tb.v 
+s35(17Nov2015:01:05:44):  irun -access +rwc clk_out.v lfsr.v lfsr_tb.v 
+s36(17Nov2015:01:10:44):  irun -access +rwc clk_out.v lfsr.v lfsr_tb.v 
+s37(17Nov2015:01:10:53):  irun clk_out.v lfsr.v lfsr_tb.v 
+s38(17Nov2015:01:12:11):  irun clk_out.v lfsr.v lfsr_tb.v 
+s39(17Nov2015:01:12:40):  irun clk_out.v lfsr.v lfsr_tb.v 
+s40(17Nov2015:01:12:49):  irun clk_out.v lfsr.v lfsr_tb.v 
+s41(17Nov2015:01:15:42):  irun -access +rwc -gui clk_out.v counter.v lfsr_tb.v lfsr.v 
+s42(17Nov2015:01:20:13):  irun -access +rwc -gui clk_out.v counter.v lfsr_tb.v lfsr.v -s  
+s43(17Nov2015:01:25:29):  irun -access +rwc -gui clk_out.v counter.v lfsr_tb.v lfsr.v 
+s44(17Nov2015:01:26:00):  irun clk_out.v lfsr.v lfsr_tb.v 
+s45(17Nov2015:01:26:19):  irun clk_out.v lfsr.v lfsr_tb.v 
+s46(17Nov2015:01:28:26):  irun clk_out.v lfsr.v lfsr_tb.v 
+s47(17Nov2015:01:36:54):  irun -access +rwc -gui clk_out.v lfsr_tb.v lfsr.v 
+s48(17Nov2015:01:48:16):  irun -access +rwc -gui clk_out.v lfsr_tb.v lfsr.v 
+s49(17Nov2015:01:55:44):  irun -access +rwc clk_out.v lfsr_tb.v lfsr.v 
+s50(17Nov2015:02:04:45):  irun -access +rwc clk_out.v lfsr_tb.v lfsr.v 
+s51(17Nov2015:02:11:26):  irun -access +rwc clk_out.v lfsr_tb.v lfsr.v -tcl 
+s52(17Nov2015:02:18:08):  irun -access +rwc clk_out.v lfsr_tb.v lfsr.v -tcl 
+s53(17Nov2015:02:39:04):  irun -access +rwc clk_out.v lfsr_tb.v lfsr.v -tcl 
+s54(17Nov2015:02:47:35):  irun -access +rwc clk_out.v lfsr_tb.v lfsr.v -tcl 
+s55(17Nov2015:02:59:03):  irun -access +rwc clk_out.v lfsr_tb.v lfsr.v -tcl 
+s56(17Nov2015:03:05:08):  irun -access +rwc clk_out.v lfsr_tb.v lfsr.v -tcl 
+s57(17Nov2015:03:10:07):  irun -access +rwc -gui clk_out.v lfsr_tb.v lfsr.v 
+s58(17Nov2015:03:37:38):  irun -access +rwc -gui clk_out.v lfsr_tb.v lfsr.v 
+s59(17Nov2015:03:46:55):  irun -access +rwc -gui clk_out.v lfsr_tb.v lfsr.v 
+s60(17Nov2015:03:57:55):  irun -access +rwc -gui clk_out.v lfsr_tb.v lfsr.v -s  
+s61(17Nov2015:03:58:13):  irun -access +rwc -gui clk_out.v lfsr_tb.v lfsr.v -s 
+s62(17Nov2015:03:58:56):  irun -access +rwc -gui clk_out.v lfsr_tb.v lfsr.v -s 
+s63(17Nov2015:10:22:58):  irun -access +rwc -gui clk_out.v lfsr_tb.v lfsr.v 
+s64(17Nov2015:10:23:57):  irun -access +rwc -gui clk_out.v lfsr_tb.v lfsr.v 
+s65(17Nov2015:10:26:17):  irun -access +rwc -gui clk_out.v lfsr_tb.v lfsr.v 
+s66(17Nov2015:10:26:41):  irun -access +rwc -gui clk_out.v lfsr_tb.v lfsr.v 
+s67(17Nov2015:10:27:08):  irun -access +rwc -gui clk_out.v lfsr_tb.v lfsr.v 
+s68(17Nov2015:10:28:26):  irun -access +rwc - clk_out.v lfsr_tb.v lfsr.v 
+s69(17Nov2015:10:28:30):  irun -access +rwc clk_out.v lfsr_tb.v lfsr.v 
+s70(17Nov2015:10:28:48):  irun -access +rwc clk_out.v lfsr_tb.v lfsr.v 
+s71(17Nov2015:10:29:20):  irun -access +rwc clk_out.v lfsr_tb.v lfsr.v 
+s72(17Nov2015:10:30:52):  irun -access +rwc clk_out.v lfsr_tb.v lfsr.v 
+s73(17Nov2015:10:31:18):  irun -access +rwc clk_out.v lfsr_tb.v lfsr.v 
+s74(17Nov2015:10:44:46):  irun -access +rwc clk_out.v lfsr_tb.v lfsr.v 
+s75(17Nov2015:10:44:58):  irun -access +rwc clk_out.v lfsr_tb.v lfsr.v 
+s76(17Nov2015:10:47:30):  irun -sv -access +rwc clk_out.v lfsr_tb.v lfsr.v 
+s77(17Nov2015:10:48:03):  irun -access +rwc -gui -sv clk_out.v counter.v lfsr_tb.v lfsr.v 
+s78(17Nov2015:10:57:17):  irun -access +rwc -gui -sv clk_out.v counter.v lfsr_tb.v lfsr.v -s  
+s79(17Nov2015:10:57:30):  irun -access +rwc -gui -sv clk_out.v counter.v lfsr_tb.v lfsr.v -s 
+s80(17Nov2015:10:59:51):  irun -access +rwc -gui -sv clk_out.v counter.v lfsr_tb.v lfsr.v -s 
+s81(17Nov2015:11:02:43):  irun -access +rwc -gui -sv clk_out.v counter.v lfsr_tb.v lfsr.v -s 
+s82(17Nov2015:12:25:49):  irun -access +rwc -gui -sv clk_out.v counter.v lfsr_tb.v lfsr.v 
+s83(17Nov2015:13:54:30):  irun -access +rwc -gui -sv clk_out.v counter.v lfsr_tb.v lfsr.v 
+s84(17Nov2015:13:55:02):  irun -access +rwc -gui -sv clk_out.v counter.v lfsr_tb.v lfsr.v 
+s85(17Nov2015:13:55:20):  irun -access +rwc -gui -sv clk_out.v counter.v lfsr_tb.v lfsr.v 
+s86(17Nov2015:13:55:38):  irun -access +rwc -gui -sv clk_out.v counter.v lfsr_tb.v lfsr.v 
+s87(17Nov2015:14:12:02):  irun -access +rwc -gui -sv clk_out.v counter.v lfsr_tb.v lfsr.v -s  
+s88(17Nov2015:14:14:29):  irun -access +rwc -gui -sv clk_out.v counter.v lfsr_tb.v lfsr.v -s 
+s89(17Nov2015:14:14:59):  irun -access +rwc -gui -sv clk_out.v counter.v lfsr_tb.v lfsr.v -s 
+s90(17Nov2015:14:16:15):  irun -access +rwc -gui -sv clk_out.v counter.v lfsr_tb.v lfsr.v 
+s91(17Nov2015:14:30:00):  irun -access +rwc -gui -sv clk_out.v counter.v lfsr_tb.v lfsr.v 
+s92(17Nov2015:14:51:11):  irun -access +rwc -gui -sv clk_out.v counter.v lfsr_tb.v lfsr.v -s  
+s93(17Nov2015:15:13:52):  irun -access +rwc -gui -sv clk_out.v counter.v lfsr_tb.v lfsr.v 
+s94(17Nov2015:15:32:12):  irun -access +rwc -gui -sv clk_out.v counter.v lfsr_tb.v lfsr.v -s  
+s95(17Nov2015:15:33:57):  irun -access +rwc -gui -sv clk_out.v counter.v lfsr_tb.v lfsr.v -s 
+s96(17Nov2015:15:38:04):  irun -access +rwc -gui -sv clk_out.v counter.v lfsr_tb.v lfsr.v -s 
+s97(17Nov2015:16:22:26):  irun -access +rwc -gui -sv clk_out.v counter.v lfsr_tb.v lfsr.v -s 
+s98(17Nov2015:16:35:30):  irun -access +rwc -gui -sv clk_out.v counter.v lfsr_tb.v lfsr.v -s 
+s99(17Nov2015:16:46:53):  irun -access +rwc -gui -sv clk_out.v counter.v lfsr_tb.v lfsr.v -s 
+s100(17Nov2015:16:59:43):  irun -access +rwc -sv clk_out.v counter.v lfsr_tb.v lfsr.v 
+s101(17Nov2015:17:05:35):  irun -access +rwc -sv clk_out.v counter.v lfsr_tb.v lfsr.v 
+s102(17Nov2015:17:07:45):  irun -access +rwc -sv clk_out.v counter.v lfsr_tb.v lfsr.v 
+s103(17Nov2015:17:08:45):  irun -access +rwc -sv clk_out.v counter.v lfsr_tb.v lfsr.v 
+s104(17Nov2015:17:10:19):  irun -access +rwc -sv clk_out.v counter.v lfsr_tb.v lfsr.v 
+s105(17Nov2015:17:16:02):  irun -access +rwc -sv clk_out.v counter.v lfsr_tb.v lfsr.v 
+s106(17Nov2015:17:19:12):  irun -access +rwc -sv clk_out.v counter.v lfsr_tb.v lfsr.v 
+s107(17Nov2015:17:21:04):  irun -access +rwc -sv clk_out.v counter.v lfsr_tb.v lfsr.v 
+s108(17Nov2015:17:22:20):  irun -access +rwc -sv clk_out.v counter.v lfsr_tb.v lfsr.v 
+s109(17Nov2015:17:32:50):  irun -access +rwc -sv clk_out.v counter.v lfsr_tb.v lfsr.v 
+s110(17Nov2015:17:33:26):  irun -access +rwc -sv clk_out.v counter.v lfsr_tb.v lfsr.v 
+s111(17Nov2015:17:34:30):  irun -access +rwc -sv clk_out.v counter.v lfsr_tb.v lfsr.v 
+s112(17Nov2015:17:38:42):  irun -access +rwc -sv clk_out.v counter.v lfsr_tb.v lfsr.v 
+s113(17Nov2015:17:39:55):  irun -access +rwc -sv clk_out.v counter.v lfsr_tb.v lfsr.v 
+s114(17Nov2015:17:45:09):  irun -access +rwc -sv clk_out.v counter.v lfsr_tb.v lfsr.v 
+s115(17Nov2015:17:48:21):  irun -access +rwc -sv clk_out.v counter.v lfsr_tb.v lfsr.v 
+s116(17Nov2015:17:49:17):  irun -access +rwc -sv clk_out.v counter.v lfsr_tb.v lfsr.v 
+s117(17Nov2015:17:49:35):  irun -access +rwc -sv clk_out.v counter.v lfsr_tb.v lfsr.v 
+s118(01Dec2015:11:44:38):  irun -access +rwc lfsr.v lfsr_tb.v clk_out.v 
+s119(01Dec2015:11:45:19):  irun -access +rwc lfsr.v lfsr_tb.v clk_out.v -gui 
+s120(01Dec2015:11:47:38):  irun -access +rwc lfsr.v lfsr_tb.v clk_out.v -gui -s  
+s121(01Dec2015:11:49:43):  irun -access +rwc lfsr.v lfsr_tb.v clk_out.v -gui -s 
+s122(18Jan2016:00:02:59):  irun -access +rwc lfsr.v lfsr_tb.v clk_out.v 
+s123(18Jan2016:00:03:25):  irun -access +rwc lfsr.v lfsr_tb.v clk_out.v counter.v 
