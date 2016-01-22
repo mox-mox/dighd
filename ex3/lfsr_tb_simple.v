@@ -17,9 +17,9 @@ initial begin
 	res_n <= 0;
 	#4;
 	res_n <= 1;
+	enable <= 1;
 	$display(" ==== Starting ====");
 	#10;
-	enable <= 1;
 	#10;
 	#10;
 	#10;
