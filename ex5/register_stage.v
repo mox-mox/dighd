@@ -4,7 +4,7 @@ module register_stage #(parameter WIDTH=32) (input wire clk, input wire res_n,
                                    input wire prev_filled, output reg filled, input wire next_filled
                                   );
 
-always @(posedge clk or negedge res_n)
+	always @(posedge clk or negedge res_n)
 	begin
 		if (res_n == 1'b0)
 		begin
