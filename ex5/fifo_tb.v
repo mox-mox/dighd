@@ -1,9 +1,10 @@
+		//$write(" ◻◼▯■□●◯◾◾◽ Address = %g",j);
 `default_nettype none
 `timescale 10ns/1ns
 
 module fifo_tb;
 parameter TESTWIDTH=8;
-parameter TESTDEPTH=3;
+parameter TESTDEPTH=10;
 	//{{{
 	/* Make a regular pulsing clock. */
 	parameter clk_period=1;
@@ -39,10 +40,28 @@ parameter TESTDEPTH=3;
 	                                            .full(full), .empty(empty)
 	                                           );
 
+//	task print_status(input[TESTWIDTH-1:0] outdata, input full, input empty);
+//	begin
+//		if(full == 1'b0 && empty == 1'b0)
+//			$display("%t: output=%h",$time, outdata);
+//		if(full == 1'b0 && empty == 1'b1)
+//			$display("%t: output=%h EMPTY",$time, outdata);
+//		if(full == 1'b1 && empty == 1'b0)
+//			$display("%t: output=%h FULL",$time, outdata);
+//		if(full == 1'b1 && empty == 1'b1)
+//			$display("%t: output=%h FULL EMPTY",$time, outdata);
+//	end
+//	endtask
+//	always @(outdata, full, empty) begin
+//		print_status(outdata, full, empty);
+//	end
 
 
 
+// Jeweils alle Kombinationen von shift_in, shift_out und reset für die Füllstände "Leer" "Ein Element" "Halbvoll" "Fast voll" und "Voll".
+// Für echte Hardware zusätzlich noch Test, ob der Fifo bei bestimmten Daten Probleme bekommt (Siehe FDIV-Bug).
 
+reg[TESTWIDTH-1:0][4:0] TESTVECTOR = {8'haf, 8'hfe, 8'ha5, 8'h31};
 
 	initial begin
 	$dumpfile("fifo.vcd");
@@ -85,16 +104,6 @@ parameter TESTDEPTH=3;
 	end
 
 
-	always @(outdata, full, empty) begin
-		if(full == 1'b0 && empty == 1'b0)
-			$display("%t: output=%h",$time, outdata);
-		if(full == 1'b0 && empty == 1'b1)
-			$display("%t: output=%h EMPTY",$time, outdata);
-		if(full == 1'b1 && empty == 1'b0)
-			$display("%t: output=%h FULL",$time, outdata);
-		if(full == 1'b1 && empty == 1'b1)
-			$display("%t: output=%h FULL EMPTY",$time, outdata);
-	end
 
 
 

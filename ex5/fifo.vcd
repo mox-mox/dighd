@@ -1,5 +1,5 @@
 $date
-	Wed Jan 27 19:17:12 2016
+	Sun Jan 31 12:49:23 2016
 $end
 $version
 	Icarus Verilog
@@ -11,61 +11,161 @@ $scope module fifo_tb $end
 $var wire 8 ! outdata [7:0] $end
 $var wire 1 " full $end
 $var wire 1 # empty $end
-$var reg 1 $ clk $end
-$var reg 8 % indata [7:0] $end
-$var reg 1 & res_n $end
-$var reg 1 ' shift_in $end
-$var reg 1 ( shift_out $end
+$var reg 40 $ TESTVECTOR [39:0] $end
+$var reg 1 % clk $end
+$var reg 8 & indata [7:0] $end
+$var reg 1 ' res_n $end
+$var reg 1 ( shift_in $end
+$var reg 1 ) shift_out $end
 $scope module fifo_I $end
-$var wire 1 $ clk $end
-$var wire 8 ) rdata [7:0] $end
-$var wire 1 & res_n $end
-$var wire 1 ' shift_in $end
-$var wire 1 ( shift_out $end
-$var wire 8 * wdata [7:0] $end
+$var wire 1 % clk $end
+$var wire 8 * rdata [7:0] $end
+$var wire 1 ' res_n $end
+$var wire 1 ( shift_in $end
+$var wire 1 ) shift_out $end
+$var wire 8 + wdata [7:0] $end
 $var wire 1 " full $end
-$var wire 5 + filled [4:0] $end
+$var wire 12 , filled [11:0] $end
 $var wire 1 # empty $end
+$var integer 32 - j [31:0] $end
 $scope begin foobar[0] $end
 $scope module stage_I $end
-$var wire 1 $ clk $end
-$var wire 8 , fill_in [7:0] $end
-$var wire 8 - fwd_in [7:0] $end
-$var wire 1 . next_filled $end
-$var wire 1 / prev_filled $end
-$var wire 1 & res_n $end
-$var wire 1 ' shift_in $end
-$var wire 1 ( shift_out $end
-$var reg 8 0 data_out [7:0] $end
-$var reg 1 1 filled $end
+$var wire 1 % clk $end
+$var wire 8 . fill_in [7:0] $end
+$var wire 8 / fwd_in [7:0] $end
+$var wire 1 0 next_filled $end
+$var wire 1 1 prev_filled $end
+$var wire 1 ' res_n $end
+$var wire 1 ( shift_in $end
+$var wire 1 ) shift_out $end
+$var reg 8 2 data_out [7:0] $end
+$var reg 1 3 filled $end
 $upscope $end
 $upscope $end
 $scope begin foobar[1] $end
 $scope module stage_I $end
-$var wire 1 $ clk $end
-$var wire 8 2 fill_in [7:0] $end
-$var wire 8 3 fwd_in [7:0] $end
-$var wire 1 4 next_filled $end
-$var wire 1 5 prev_filled $end
-$var wire 1 & res_n $end
-$var wire 1 ' shift_in $end
-$var wire 1 ( shift_out $end
-$var reg 8 6 data_out [7:0] $end
-$var reg 1 7 filled $end
+$var wire 1 % clk $end
+$var wire 8 4 fill_in [7:0] $end
+$var wire 8 5 fwd_in [7:0] $end
+$var wire 1 6 next_filled $end
+$var wire 1 7 prev_filled $end
+$var wire 1 ' res_n $end
+$var wire 1 ( shift_in $end
+$var wire 1 ) shift_out $end
+$var reg 8 8 data_out [7:0] $end
+$var reg 1 9 filled $end
 $upscope $end
 $upscope $end
 $scope begin foobar[2] $end
 $scope module stage_I $end
-$var wire 1 $ clk $end
-$var wire 8 8 fill_in [7:0] $end
-$var wire 8 9 fwd_in [7:0] $end
-$var wire 1 : next_filled $end
-$var wire 1 ; prev_filled $end
-$var wire 1 & res_n $end
-$var wire 1 ' shift_in $end
-$var wire 1 ( shift_out $end
-$var reg 8 < data_out [7:0] $end
-$var reg 1 = filled $end
+$var wire 1 % clk $end
+$var wire 8 : fill_in [7:0] $end
+$var wire 8 ; fwd_in [7:0] $end
+$var wire 1 < next_filled $end
+$var wire 1 = prev_filled $end
+$var wire 1 ' res_n $end
+$var wire 1 ( shift_in $end
+$var wire 1 ) shift_out $end
+$var reg 8 > data_out [7:0] $end
+$var reg 1 ? filled $end
+$upscope $end
+$upscope $end
+$scope begin foobar[3] $end
+$scope module stage_I $end
+$var wire 1 % clk $end
+$var wire 8 @ fill_in [7:0] $end
+$var wire 8 A fwd_in [7:0] $end
+$var wire 1 B next_filled $end
+$var wire 1 C prev_filled $end
+$var wire 1 ' res_n $end
+$var wire 1 ( shift_in $end
+$var wire 1 ) shift_out $end
+$var reg 8 D data_out [7:0] $end
+$var reg 1 E filled $end
+$upscope $end
+$upscope $end
+$scope begin foobar[4] $end
+$scope module stage_I $end
+$var wire 1 % clk $end
+$var wire 8 F fill_in [7:0] $end
+$var wire 8 G fwd_in [7:0] $end
+$var wire 1 H next_filled $end
+$var wire 1 I prev_filled $end
+$var wire 1 ' res_n $end
+$var wire 1 ( shift_in $end
+$var wire 1 ) shift_out $end
+$var reg 8 J data_out [7:0] $end
+$var reg 1 K filled $end
+$upscope $end
+$upscope $end
+$scope begin foobar[5] $end
+$scope module stage_I $end
+$var wire 1 % clk $end
+$var wire 8 L fill_in [7:0] $end
+$var wire 8 M fwd_in [7:0] $end
+$var wire 1 N next_filled $end
+$var wire 1 O prev_filled $end
+$var wire 1 ' res_n $end
+$var wire 1 ( shift_in $end
+$var wire 1 ) shift_out $end
+$var reg 8 P data_out [7:0] $end
+$var reg 1 Q filled $end
+$upscope $end
+$upscope $end
+$scope begin foobar[6] $end
+$scope module stage_I $end
+$var wire 1 % clk $end
+$var wire 8 R fill_in [7:0] $end
+$var wire 8 S fwd_in [7:0] $end
+$var wire 1 T next_filled $end
+$var wire 1 U prev_filled $end
+$var wire 1 ' res_n $end
+$var wire 1 ( shift_in $end
+$var wire 1 ) shift_out $end
+$var reg 8 V data_out [7:0] $end
+$var reg 1 W filled $end
+$upscope $end
+$upscope $end
+$scope begin foobar[7] $end
+$scope module stage_I $end
+$var wire 1 % clk $end
+$var wire 8 X fill_in [7:0] $end
+$var wire 8 Y fwd_in [7:0] $end
+$var wire 1 Z next_filled $end
+$var wire 1 [ prev_filled $end
+$var wire 1 ' res_n $end
+$var wire 1 ( shift_in $end
+$var wire 1 ) shift_out $end
+$var reg 8 \ data_out [7:0] $end
+$var reg 1 ] filled $end
+$upscope $end
+$upscope $end
+$scope begin foobar[8] $end
+$scope module stage_I $end
+$var wire 1 % clk $end
+$var wire 8 ^ fill_in [7:0] $end
+$var wire 8 _ fwd_in [7:0] $end
+$var wire 1 ` next_filled $end
+$var wire 1 a prev_filled $end
+$var wire 1 ' res_n $end
+$var wire 1 ( shift_in $end
+$var wire 1 ) shift_out $end
+$var reg 8 b data_out [7:0] $end
+$var reg 1 c filled $end
+$upscope $end
+$upscope $end
+$scope begin foobar[9] $end
+$scope module stage_I $end
+$var wire 1 % clk $end
+$var wire 8 d fill_in [7:0] $end
+$var wire 8 e fwd_in [7:0] $end
+$var wire 1 f next_filled $end
+$var wire 1 g prev_filled $end
+$var wire 1 ' res_n $end
+$var wire 1 ( shift_in $end
+$var wire 1 ) shift_out $end
+$var reg 8 h data_out [7:0] $end
+$var reg 1 i filled $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -73,203 +173,361 @@ $upscope $end
 $enddefinitions $end
 #0
 $dumpvars
+0i
+b0 h
+0g
+1f
+b0 e
+b0 d
+0c
+b0 b
+0a
+0`
+b0 _
+b0 ^
+0]
+b0 \
+0[
+0Z
+b0 Y
+b0 X
+0W
+b0 V
+0U
+0T
+b0 S
+b0 R
+0Q
+b0 P
+0O
+0N
+b0 M
+b0 L
+0K
+b0 J
+0I
+0H
+b0 G
+b0 F
+0E
+b0 D
+0C
+0B
+b0 A
+b0 @
+0?
+b0 >
 0=
-b0 <
-0;
-1:
-b0 9
+0<
+b0 ;
+b0 :
+09
 b0 8
 07
-b0 6
-05
-04
-b0 3
+06
+b0 5
+b0 4
+03
 b0 2
 01
-b0 0
-0/
-0.
-b11111111 -
-b0 ,
-b10000 +
+00
+b11111111 /
+b0 .
+b1011 -
+b100000000000 ,
+b0 +
 b0 *
-b0 )
+0)
 0(
 0'
-0&
-b0 %
-1$
+b0 &
+1%
+b10101111111111101010010100110001 $
 1#
 0"
 b0 !
 $end
 #5
-b10010 %
-b10010 *
-b10010 ,
-b10010 2
-b10010 8
+b10010 &
+b10010 +
+b10010 .
+b10010 4
+b10010 :
+b10010 @
+b10010 F
+b10010 L
+b10010 R
+b10010 X
+b10010 ^
+b10010 d
+1(
 1'
-1&
-0$
+0%
 #10
 0#
-14
-b11000 +
-1=
+1`
+b110000000000 ,
+1i
 b10010 !
-b10010 )
-b10010 <
-1$
+b10010 *
+b10010 h
+b1011 -
+1%
 #15
-b110100 %
-b110100 *
-b110100 ,
-b110100 2
-b110100 8
-0$
+b110100 &
+b110100 +
+b110100 .
+b110100 4
+b110100 :
+b110100 @
+b110100 F
+b110100 L
+b110100 R
+b110100 X
+b110100 ^
+b110100 d
+0%
 #20
-1;
-1.
-b11100 +
-17
-b110100 6
-b110100 9
-1$
+1g
+1Z
+b111000000000 ,
+1c
+b110100 b
+b110100 e
+b1011 -
+1%
 #25
-b1010110 %
-b1010110 *
-b1010110 ,
-b1010110 2
-b1010110 8
-0$
+b1010110 &
+b1010110 +
+b1010110 .
+b1010110 4
+b1010110 :
+b1010110 @
+b1010110 F
+b1010110 L
+b1010110 R
+b1010110 X
+b1010110 ^
+b1010110 d
+0%
 #30
-1"
-15
-b11110 +
-11
-b1010110 0
-b1010110 3
-1$
+1a
+1T
+b111100000000 ,
+1]
+b1010110 \
+b1010110 _
+b1011 -
+1%
 #35
-b1111000 %
-b1111000 *
-b1111000 ,
-b1111000 2
-b1111000 8
-0$
+b1111000 &
+b1111000 +
+b1111000 .
+b1111000 4
+b1111000 :
+b1111000 @
+b1111000 F
+b1111000 L
+b1111000 R
+b1111000 X
+b1111000 ^
+b1111000 d
+0%
 #40
-1$
+1[
+1N
+b111110000000 ,
+1W
+b1111000 V
+b1111000 Y
+b1011 -
+1%
 #45
-b10011010 %
-b10011010 *
-b10011010 ,
-b10011010 2
-b10011010 8
-0$
+b10011010 &
+b10011010 +
+b10011010 .
+b10011010 4
+b10011010 :
+b10011010 @
+b10011010 F
+b10011010 L
+b10011010 R
+b10011010 X
+b10011010 ^
+b10011010 d
+0%
 #50
-1$
+1U
+1H
+b111111000000 ,
+1Q
+b10011010 P
+b10011010 S
+b1011 -
+1%
 #55
-1(
-0'
-0$
-#60
-0"
-05
-b11100 +
-01
-b11111111 0
-b11111111 3
-b1010110 6
-b1010110 9
-b110100 !
-b110100 )
-b110100 <
-1$
-#65
-0$
-#70
-0;
-0.
-b1010110 !
-b1010110 )
-b1010110 <
-b11000 +
-07
-b11111111 6
-b11111111 9
-1$
-#75
-0$
-#80
-1#
-04
-b10000 +
-0=
-b11111111 !
-b11111111 )
-b11111111 <
-1$
-#85
-0$
-#90
-1$
-#95
-0$
-#100
-1$
-#105
-0$
-#110
-1$
-#115
-0$
-#120
-1$
-#125
-0$
-#130
-1$
-#135
+1)
 0(
-0$
+0%
+#60
+0U
+0H
+b11111111 2
+b11111111 5
+b111110000000 ,
+0Q
+b0 P
+b0 S
+b10011010 V
+b10011010 Y
+b1111000 \
+b1111000 _
+b1010110 b
+b1010110 e
+b110100 !
+b110100 *
+b110100 h
+b1011 -
+1%
+#65
+0%
+#70
+0[
+0N
+b1010110 !
+b1010110 *
+b1010110 h
+b1111000 b
+b1111000 e
+b10011010 \
+b10011010 _
+b111100000000 ,
+0W
+b0 V
+b0 Y
+b11111111 8
+b11111111 ;
+b1011 -
+1%
+#75
+0%
+#80
+0a
+0T
+b11111111 >
+b11111111 A
+b111000000000 ,
+0]
+b0 \
+b0 _
+b10011010 b
+b10011010 e
+b1111000 !
+b1111000 *
+b1111000 h
+b1011 -
+1%
+#85
+0%
+#90
+0g
+0Z
+b10011010 !
+b10011010 *
+b10011010 h
+b110000000000 ,
+0c
+b0 b
+b0 e
+b11111111 D
+b11111111 G
+b1011 -
+1%
+#95
+0%
+#100
+1#
+0`
+b11111111 J
+b11111111 M
+b100000000000 ,
+0i
+b0 !
+b0 *
+b0 h
+b1011 -
+1%
+#105
+0%
+#110
+b11111111 P
+b11111111 S
+b1011 -
+1%
+#115
+0%
+#120
+b11111111 V
+b11111111 Y
+b1011 -
+1%
+#125
+0%
+#130
+b11111111 \
+b11111111 _
+b1011 -
+1%
+#135
+0)
+0%
 #140
-1$
+b1011 -
+1%
 #145
-0$
+0%
 #150
-1$
+b1011 -
+1%
 #155
-0$
+0%
 #160
-1$
+b1011 -
+1%
 #165
-0$
+0%
 #170
-1$
+b1011 -
+1%
 #175
-0$
+0%
 #180
-1$
+b1011 -
+1%
 #185
-0$
+0%
 #190
-1$
+b1011 -
+1%
 #195
-0$
+0%
 #200
-1$
+b1011 -
+1%
 #205
-0$
+0%
 #210
-1$
+b1011 -
+1%
 #215
-0$
+0%
 #220
-1$
+b1011 -
+1%
 #225
-0$
+0%
 #230
-1$
+b1011 -
+1%
 #235
-0$
+0%
