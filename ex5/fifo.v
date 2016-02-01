@@ -33,11 +33,12 @@ endgenerate
 `ifdef DEBUG
 always @(posedge clk)
 begin
-	if(full == 1'b1 && shift_in == 1'b1)
-
-		$display("%c[1;31m%m: Dropping 0x%h, because the FIFO is full.%c[0m", 27, wdata, 27);
-	if(empty == 1'b1 && shift_out == 1'b1)
-		$display("%c[1;31m%m: Returning invalid value due to readout of empty FIFO.%c[0m", 27, 27);
+	if(full == 1'b1 && shift_in == 1'b1 && res_n == 1'b1)
+		$display("%c[1;33m%m: Dropping 0x%h, because the FIFO is full.%c[0m", 27, wdata, 27);
+	if(empty == 1'b1 && shift_out == 1'b1 && res_n == 1'b1)
+		$display("%c[1;33m%m: Returning invalid value due to readout of empty FIFO.%c[0m", 27, 27);
+	if(res_n == 1'b0 && (shift_in == 1'b1 || shift_out == 1'b1))
+		$display("%c[1;33m%m: Trying to access FIFO while it is in reset.%c[0m", 27, 27);
 end
 `endif
 
