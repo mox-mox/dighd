@@ -315,7 +315,63 @@ integer read=0;
 	indata <= TESTVECTOR[write][TESTWIDTH-1:0];
 	shift_out <= 1; read++;
 	#clk_period;
-	check_fifo(shift_out, outdata, full, empty, TESTVECTOR[read][TESTWIDTH-1:0], 0, 0);
+	//check_fifo(shift_out, outdata, full, empty, TESTVECTOR[read][TESTWIDTH-1:0], 0, 0);
+
+	shift_in <= 1; write++;
+	indata <= TESTVECTOR[write][TESTWIDTH-1:0];
+	shift_out <= 1; read++;
+	#clk_period;
+	//check_fifo(shift_out, outdata, full, empty, TESTVECTOR[read][TESTWIDTH-1:0], 0, 0);
+
+	shift_in <= 1; write++;
+	indata <= TESTVECTOR[write][TESTWIDTH-1:0];
+	shift_out <= 1; read++;
+	#clk_period;
+	//check_fifo(shift_out, outdata, full, empty, TESTVECTOR[read][TESTWIDTH-1:0], 0, 0);
+
+	shift_in <= 1; write++;
+	indata <= TESTVECTOR[write][TESTWIDTH-1:0];
+	shift_out <= 1; read++;
+	#clk_period;
+	//check_fifo(shift_out, outdata, full, empty, TESTVECTOR[read][TESTWIDTH-1:0], 0, 0);
+
+	shift_in <= 1; write++;
+	indata <= TESTVECTOR[write][TESTWIDTH-1:0];
+	shift_out <= 1; read++;
+	#clk_period;
+	//check_fifo(shift_out, outdata, full, empty, TESTVECTOR[read][TESTWIDTH-1:0], 0, 0);
+
+	shift_in <= 1; write++;
+	indata <= TESTVECTOR[write][TESTWIDTH-1:0];
+	shift_out <= 1; read++;
+	#clk_period;
+	//check_fifo(shift_out, outdata, full, empty, TESTVECTOR[read][TESTWIDTH-1:0], 0, 0);
+
+	shift_in <= 1; write++;
+	indata <= TESTVECTOR[write][TESTWIDTH-1:0];
+	shift_out <= 1; read++;
+	#clk_period;
+	//check_fifo(shift_out, outdata, full, empty, TESTVECTOR[read][TESTWIDTH-1:0], 0, 0);
+
+	shift_in <= 1; write++;
+	indata <= TESTVECTOR[write][TESTWIDTH-1:0];
+	shift_out <= 1; read++;
+	#clk_period;
+	//check_fifo(shift_out, outdata, full, empty, TESTVECTOR[read][TESTWIDTH-1:0], 0, 0);
+
+	shift_in <= 1; write++;
+	indata <= TESTVECTOR[write][TESTWIDTH-1:0];
+	shift_out <= 1; read++;
+	#clk_period;
+	//check_fifo(shift_out, outdata, full, empty, TESTVECTOR[read][TESTWIDTH-1:0], 0, 0);
+
+	shift_in <= 1; write++;
+	indata <= TESTVECTOR[write][TESTWIDTH-1:0];
+	shift_out <= 1; read++;
+	#clk_period;
+	//check_fifo(shift_out, outdata, full, empty, TESTVECTOR[read][TESTWIDTH-1:0], 0, 0);
+
+
 	shift_in <= 0; //write++;
 	indata <= TESTVECTOR[write][TESTWIDTH-1:0];
 	shift_out <= 0; //read++;
