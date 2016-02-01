@@ -259,34 +259,28 @@ integer i=0;
 		indata <= TESTVECTOR[write][TESTWIDTH-1:0];
 		shift_out <= 1;// read++;
 		#clk_period;
-		check_fifo(shift_out, outdata, full, empty, TESTVECTOR[read][TESTWIDTH-1:0], 0, 1);
+		check_fifo(shift_out, outdata, full, empty, {TESTWIDTH{1'bx}}, 0, 1); // Only check that the FIFO stays empty
 	end
 	success;
 
 	$display("STARTING OVERFILL TEST:");
 	write=-1;
 	read=0;
-	check_fifo(shift_out, outdata, full, empty, 16'hxxxx, 0, 1);
-	shift_in = 1; write++;
-	indata <= TESTVECTOR[write][TESTWIDTH-1:0];
-	shift_out <= 0;// read++;
-	#clk_period;
+	check_fifo(shift_out, outdata, full, empty, {TESTWIDTH{1'bx}}, 0, 1);
 
 	repeat(TESTDEPTH-1)
 	begin
-		check_fifo(shift_out, outdata, full, empty, TESTVECTOR[read][TESTWIDTH-1:0], 0, 0);
 		shift_in = 1; write++;
 		indata <= TESTVECTOR[write][TESTWIDTH-1:0];
 		shift_out <= 0;// read++;
 		#clk_period;
+		check_fifo(shift_out, outdata, full, empty, TESTVECTOR[read][TESTWIDTH-1:0], 0, 0);
 	end
-
-
-	check_fifo(shift_out, outdata, full, empty, TESTVECTOR[read][TESTWIDTH-1:0], 1, 0);
-	shift_in = 0; //write++;
+	shift_in = 1; write++;
 	indata <= TESTVECTOR[write][TESTWIDTH-1:0];
 	shift_out <= 0;// read++;
 	#clk_period;
+	check_fifo(shift_out, outdata, full, empty, TESTVECTOR[read][TESTWIDTH-1:0], 1, 0);
 
 	// FIFO is full now
 
@@ -295,32 +289,33 @@ integer i=0;
 	`endif
 	repeat(5)
 	begin
-		check_fifo(shift_out, outdata, full, empty, TESTVECTOR[read][TESTWIDTH-1:0], 1, 0);
 		shift_in = 1; //write++;
 		indata <= TESTVECTOR[write][TESTWIDTH-1:0];
 		shift_out <= 0;// read++;
 		#clk_period;
+		check_fifo(shift_out, outdata, full, empty, TESTVECTOR[read][TESTWIDTH-1:0], 1, 0);
 	end
-	check_fifo(shift_out, outdata, full, empty, TESTVECTOR[read][TESTWIDTH-1:0], 1, 0);
-	shift_in = 0; //write++;
-	indata <= TESTVECTOR[write][TESTWIDTH-1:0];
-	shift_out <= 1; read++;
-	#clk_period;
 
 	repeat(TESTDEPTH-1)
 	begin
-		check_fifo(shift_out, outdata, full, empty, TESTVECTOR[read][TESTWIDTH-1:0], 0, 0);
 		shift_in = 0; //write++;
 		indata <= TESTVECTOR[write][TESTWIDTH-1:0];
 		shift_out <= 1; read++;
 		#clk_period;
+		check_fifo(shift_out, outdata, full, empty, TESTVECTOR[read][TESTWIDTH-1:0], 0, 0);
 	end
-
+	shift_in = 0; //write++;
+	indata <= TESTVECTOR[write][TESTWIDTH-1:0];
+	shift_out <= 1; read++;
+	#clk_period;
 	check_fifo(shift_out, outdata, full, empty, TESTVECTOR[read][TESTWIDTH-1:0], 0, 1);
+
+	// NOP to see the empty state shown
 	shift_in = 0; //write++;
 	indata <= TESTVECTOR[write][TESTWIDTH-1:0];
 	shift_out <= 0; //read++;
 	#clk_period;
+	check_fifo(shift_out, outdata, full, empty, TESTVECTOR[read][TESTWIDTH-1:0], 0, 1);
 	success;
 
 
@@ -328,7 +323,7 @@ integer i=0;
 	write=-1; // Restart the test pattern
 	read=0;
 
-	#2 res_n = 0; // Generate a short spike on the reset line
+	#2 res_n = 0; // Generate a short (asynchronous) spike on the reset line
 	#1 res_n = 1;
 
 
@@ -338,17 +333,20 @@ integer i=0;
 	shift_out <= 0; //read++;
 	#clk_period;
 	check_fifo(shift_out, outdata, full, empty, {TESTWIDTH{1'b0}}, 0, 1);
-
-
-
-
-
-
-
-
-
 	success;
 
+
+
+
+
+	// TODO:
+	// - Reset-test for semi-full
+	// - Reset-test for full
+	// - Reset-operation-test for empty
+	// - Reset-operation-test for semi-full
+	// - Reset-operation-test for full
+	// - Pass-through-test for empty state
+	// - Pass-through-test for semi-full
 
 
 
