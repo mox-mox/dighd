@@ -39,13 +39,16 @@ module register_stage #(parameter WIDTH=32) (input wire clk, input wire res_n,
 				end
 				2'b11:
 				begin
-					if(prev_filled == 1'b0 && filled == 1'b1 && next_filled == 1'b1)
+					$display("%m: prev_filled = %b, filled = %b, next_filled = %b", prev_filled, filled, next_filled);
+					if(prev_filled == 1'b0 && filled == 1'b0 && next_filled == 1'b1)
 					begin // Fill in if this stage WILL be the first empty one ...
+						$display("filling in");
 						data_out <= fill_in;
 						filled <= 1'b1;
 					end
 					else
 					begin // ... or shift the value
+						$display("forwarding in");
 						data_out <= fwd_in;
 						filled <= prev_filled;
 					end

@@ -47,6 +47,7 @@ end
 integer j;
 always @(posedge clk)
 begin
+	#1
 	$write("%c[1;34m%m: STATUS:", 27);
 	if(shift_in == 1'b1)
 		$write(" => %h ", wdata);

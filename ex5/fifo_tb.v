@@ -1,6 +1,6 @@
 		//$write(" ◻◼▯■□●◯◾◾◽ Address = %g",j);
 `default_nettype none
-`timescale 1ns/1ns
+//`timescale 1ns/1ns
 
 module fifo_tb;
 parameter TESTWIDTH=16;
@@ -24,6 +24,11 @@ parameter TESTDEPTH=10;
 	end
 	//}}}
 
+	task resync; // Used to phase-shift the testbench to align on the falling edge of the clock.
+	begin        // They get out of phase, when crooked wait times are used, for example to generate an asyncronous reset.
+		#(clk_period+half_clk_period-($time%clk_period));
+	end
+	endtask
 
 
 
@@ -65,7 +70,7 @@ parameter TESTDEPTH=10;
 
 	task pass;
 	begin
-		$display("%c[1;34m",27);
+		$display("%c[1;32m",27);
 		$display("***************************************");
 		$display("*********** TEST CASE PASS ************");
 		$display("***************************************");
@@ -88,13 +93,13 @@ parameter TESTDEPTH=10;
 
 	task success;
 	begin
-			$display("%c[1;32m-----------------------------------------------------------> SUCCESS.%c[0m", 27, 27);
+			$display("%c[1;32m-----------------------------------------------------------> SUCCESS.%c[0m\n", 27, 27);
 	end
 	endtask
 
 	task defeat;
 	begin
-			$display("%c[1;31m-----------------------------------------------------------> FAILED.%c[0m", 27, 27);
+			$display("%c[1;31m-----------------------------------------------------------> FAILED.%c[0m\n", 27, 27);
 			fail;
 	end
 	endtask
@@ -141,7 +146,6 @@ reg[TESTWIDTH-1:0] TESTVECTOR[TESTDEPTH*2+5:0];
 
 integer write=-1;
 integer read=0;
-integer i=0;
 	initial begin
 	$dumpfile("fifo.vcd");
 	$dumpvars(0, fifo_tb);
@@ -183,20 +187,13 @@ integer i=0;
 
 	repeat(TESTDEPTH-1)
 	begin
-		shift_in = 1; write++;
+		shift_in <= 1; write++;
 		indata <= TESTVECTOR[write][TESTWIDTH-1:0];
 		shift_out <= 0;// read++;
 		#clk_period;
 		check_fifo(shift_out, outdata, full, empty, TESTVECTOR[read][TESTWIDTH-1:0], 0, 0);
 	end
-	shift_in = 1; write++;
-	indata <= TESTVECTOR[write][TESTWIDTH-1:0];
-	shift_out <= 0;// read++;
-	#clk_period;
-	check_fifo(shift_out, outdata, full, empty, TESTVECTOR[read][TESTWIDTH-1:0], 1, 0);
-
-	// NOP to see the full state shown
-	shift_in = 0; //write++;
+	shift_in <= 1; write++;
 	indata <= TESTVECTOR[write][TESTWIDTH-1:0];
 	shift_out <= 0;// read++;
 	#clk_period;
@@ -206,7 +203,7 @@ integer i=0;
 	$display("STARTING FULL NOP TEST:");
 	repeat(5)
 	begin
-		shift_in = 0; //write++;
+		shift_in <= 0; //write++;
 		indata <= TESTVECTOR[write][TESTWIDTH-1:0];
 		shift_out <= 0;// read++;
 		#clk_period;
@@ -217,22 +214,15 @@ integer i=0;
 	$display("STARTING Shift_out TEST:");
 	repeat(TESTDEPTH-1)
 	begin
-		shift_in = 0; //write++;
+		shift_in <= 0; //write++;
 		indata <= TESTVECTOR[write][TESTWIDTH-1:0];
 		shift_out <= 1; read++;
 		#clk_period;
 		check_fifo(shift_out, outdata, full, empty, TESTVECTOR[read][TESTWIDTH-1:0], 0, 0);
 	end
-	shift_in = 0; //write++;
+	shift_in <= 0; //write++;
 	indata <= TESTVECTOR[write][TESTWIDTH-1:0];
 	shift_out <= 1; read++;
-	#clk_period;
-	check_fifo(shift_out, outdata, full, empty, TESTVECTOR[read][TESTWIDTH-1:0], 0, 1);
-
-	// NOP to see the empty state shown
-	shift_in = 0; //write++;
-	indata <= TESTVECTOR[write][TESTWIDTH-1:0];
-	shift_out <= 0; //read++;
 	#clk_period;
 	check_fifo(shift_out, outdata, full, empty, TESTVECTOR[read][TESTWIDTH-1:0], 0, 1);
 	success;
@@ -240,7 +230,7 @@ integer i=0;
 	$display("STARTING EMPTY NOP TEST:");
 	repeat(5)
 	begin
-		shift_in = 0; //write++;
+		shift_in <= 0; //write++;
 		indata <= TESTVECTOR[write][TESTWIDTH-1:0];
 		shift_out <= 0;// read++;
 		#clk_period;
@@ -255,7 +245,7 @@ integer i=0;
 	`endif
 	repeat(5)
 	begin
-		shift_in = 0; //write++;
+		shift_in <= 0; //write++;
 		indata <= TESTVECTOR[write][TESTWIDTH-1:0];
 		shift_out <= 1;// read++;
 		#clk_period;
@@ -270,13 +260,13 @@ integer i=0;
 
 	repeat(TESTDEPTH-1)
 	begin
-		shift_in = 1; write++;
+		shift_in <= 1; write++;
 		indata <= TESTVECTOR[write][TESTWIDTH-1:0];
 		shift_out <= 0;// read++;
 		#clk_period;
 		check_fifo(shift_out, outdata, full, empty, TESTVECTOR[read][TESTWIDTH-1:0], 0, 0);
 	end
-	shift_in = 1; write++;
+	shift_in <= 1; write++;
 	indata <= TESTVECTOR[write][TESTWIDTH-1:0];
 	shift_out <= 0;// read++;
 	#clk_period;
@@ -289,7 +279,7 @@ integer i=0;
 	`endif
 	repeat(5)
 	begin
-		shift_in = 1; //write++;
+		shift_in <= 1; //write++;
 		indata <= TESTVECTOR[write][TESTWIDTH-1:0];
 		shift_out <= 0;// read++;
 		#clk_period;
@@ -298,43 +288,200 @@ integer i=0;
 
 	repeat(TESTDEPTH-1)
 	begin
-		shift_in = 0; //write++;
+		shift_in <= 0; //write++;
 		indata <= TESTVECTOR[write][TESTWIDTH-1:0];
 		shift_out <= 1; read++;
 		#clk_period;
 		check_fifo(shift_out, outdata, full, empty, TESTVECTOR[read][TESTWIDTH-1:0], 0, 0);
 	end
-	shift_in = 0; //write++;
+	shift_in <= 0; //write++;
 	indata <= TESTVECTOR[write][TESTWIDTH-1:0];
 	shift_out <= 1; read++;
 	#clk_period;
 	check_fifo(shift_out, outdata, full, empty, TESTVECTOR[read][TESTWIDTH-1:0], 0, 1);
+	success;
 
-	// NOP to see the empty state shown
-	shift_in = 0; //write++;
+	$display("STARTING EMPTY PASS-THROUGH TEST");
+	shift_in <= 0;
+	shift_out <= 0;
+	#2 res_n = 0; // Generate a short (asynchronous) spike on the reset line
+	$display("-- reset --");
+	#1 res_n = 1;
+	resync;
+	write=-1;
+	read=-1;
+
+	shift_in <= 1; write++;
+	indata <= TESTVECTOR[write][TESTWIDTH-1:0];
+	shift_out <= 1; read++;
+	#clk_period;
+	check_fifo(shift_out, outdata, full, empty, TESTVECTOR[read][TESTWIDTH-1:0], 0, 0);
+	shift_in <= 0; //write++;
 	indata <= TESTVECTOR[write][TESTWIDTH-1:0];
 	shift_out <= 0; //read++;
 	#clk_period;
-	check_fifo(shift_out, outdata, full, empty, TESTVECTOR[read][TESTWIDTH-1:0], 0, 1);
-	success;
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 	$display("STARTING EMPTY RESET TEST:");
-	write=-1; // Restart the test pattern
-	read=0;
-
-	#2 res_n = 0; // Generate a short (asynchronous) spike on the reset line
-	#1 res_n = 1;
-
 
 	check_fifo(shift_out, outdata, full, empty, {TESTWIDTH{1'b0}}, 0, 1);
-	shift_in = 0; //write++;
+	shift_in <= 0; //write++;
 	indata <= TESTVECTOR[write][TESTWIDTH-1:0];
 	shift_out <= 0; //read++;
 	#clk_period;
+
+	#2 res_n = 0; // Generate a short (asynchronous) spike on the reset line
+	$display("-- reset --");
+	#1 res_n = 1;
+	resync;
+
 	check_fifo(shift_out, outdata, full, empty, {TESTWIDTH{1'b0}}, 0, 1);
 	success;
 
+	$display("STARTING SEMI-FULL RESET TEST:");
+	write=0; // Restart the test pattern
+	read=0;
+	check_fifo(shift_out, outdata, full, empty, 16'hxxxx, 0, 1);
+
+	repeat(TESTDEPTH-5)
+	begin
+		shift_in <= 1; write++;
+		indata <= TESTVECTOR[write][TESTWIDTH-1:0];
+		shift_out <= 0;// read++;
+		#clk_period;
+		check_fifo(shift_out, outdata, full, empty, TESTVECTOR[read][TESTWIDTH-1:0], 0, 0);
+	end
+	shift_in <= 0; //write++;
+
+	#3 res_n = 0; // Generate a short (asynchronous) spike on the reset line
+	$display("-- reset --");
+	#1 res_n = 1;
+	resync;
+
+	check_fifo(shift_out, outdata, full, empty, {TESTWIDTH{1'b0}}, 0, 1);
+	success;
+
+	$display("STARTING FULL RESET TEST:");
+	write=0; // Restart the test pattern
+	read=0;
+	check_fifo(shift_out, outdata, full, empty, 16'hxxxx, 0, 1);
+
+	repeat(TESTDEPTH-1)
+	begin
+		shift_in <= 1; write++;
+		indata <= TESTVECTOR[write][TESTWIDTH-1:0];
+		shift_out <= 0;// read++;
+		#clk_period;
+		check_fifo(shift_out, outdata, full, empty, TESTVECTOR[read][TESTWIDTH-1:0], 0, 0);
+	end
+	shift_in <= 1; write++;
+	indata <= TESTVECTOR[write][TESTWIDTH-1:0];
+	shift_out <= 0;// read++;
+	#clk_period;
+	check_fifo(shift_out, outdata, full, empty, TESTVECTOR[read][TESTWIDTH-1:0], 1, 0);
+	shift_in <= 0; //write++;
+
+	#3 res_n = 0; // Generate a short (asynchronous) spike on the reset line
+	$display("-- reset --");
+	#1 res_n = 1;
+	resync;
+
+	check_fifo(shift_out, outdata, full, empty, {TESTWIDTH{1'b0}}, 0, 1);
+	success;
+
+
+
+
+
+
+
+
+
+
+	$display("END");
+	pass;
+	$finish;
+
+
+
+
+//	shift_in <= 1; write++;
+//	indata <= TESTVECTOR[write][TESTWIDTH-1:0];
+//	shift_out <= 0;// read++;
+//	#clk_period;
+//	check_fifo(shift_out, outdata, full, empty, TESTVECTOR[read][TESTWIDTH-1:0], 1, 0);
+//
+//	// NOP to see the full state shown
+//	shift_in <= 0; //write++;
+//	indata <= TESTVECTOR[write][TESTWIDTH-1:0];
+//	shift_out <= 0;// read++;
+//	#clk_period;
+//	check_fifo(shift_out, outdata, full, empty, TESTVECTOR[read][TESTWIDTH-1:0], 1, 0);
+//	success;
+//
+//
+//	write=-1; // Restart the test pattern
+//	read=0;
+//
+//	#2 res_n = 0; // Generate a short (asynchronous) spike on the reset line
+//	#1 res_n = 1;
+//
+//
+//
+//
+//
+//
+//	$display("STARTING FULL RESET TEST:");
+//	check_fifo(shift_out, outdata, full, empty, 16'hxxxx, 0, 1);
+//
+//	repeat(TESTDEPTH-1)
+//	begin
+//		shift_in <= 1; write++;
+//		indata <= TESTVECTOR[write][TESTWIDTH-1:0];
+//		shift_out <= 0;// read++;
+//		#clk_period;
+//		check_fifo(shift_out, outdata, full, empty, TESTVECTOR[read][TESTWIDTH-1:0], 0, 0);
+//	end
+//	shift_in <= 1; write++;
+//	indata <= TESTVECTOR[write][TESTWIDTH-1:0];
+//	shift_out <= 0;// read++;
+//	#clk_period;
+//	check_fifo(shift_out, outdata, full, empty, TESTVECTOR[read][TESTWIDTH-1:0], 1, 0);
+//
+//	// NOP to see the full state shown
+//	shift_in <= 0; //write++;
+//	indata <= TESTVECTOR[write][TESTWIDTH-1:0];
+//	shift_out <= 0;// read++;
+//	#clk_period;
+//	check_fifo(shift_out, outdata, full, empty, TESTVECTOR[read][TESTWIDTH-1:0], 1, 0);
+//	success;
+//
+//	$display("STARTING FULL NOP TEST:");
+//	repeat(5)
+//	begin
+//		shift_in <= 0; //write++;
+//		indata <= TESTVECTOR[write][TESTWIDTH-1:0];
+//		shift_out <= 0;// read++;
+//		#clk_period;
+//		check_fifo(shift_out, outdata, full, empty, TESTVECTOR[read][TESTWIDTH-1:0], 1, 0);
+//	end
+//
+//	#2 res_n = 0; // Generate a short (asynchronous) spike on the reset line
+//	#1 res_n = 1;
+//	check_fifo(shift_out, outdata, full, empty, {TESTWIDTH{1'b0}}, 0, 1);
+//	success;
 
 
 
