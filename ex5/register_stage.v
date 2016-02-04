@@ -54,9 +54,3 @@ module register_stage #(parameter WIDTH=32) (input wire clk, input wire res_n,
 		end
 	end
 endmodule
-
-
-
-
-
-
