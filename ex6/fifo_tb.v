@@ -48,21 +48,6 @@ parameter TESTDEPTH=10;
 	                                            .full(full), .empty(empty)
 	                                           );
 
-//	task print_status(input[TESTWIDTH-1:0] outdata, input full, input empty);
-//	begin
-//		if(full == 1'b0 && empty == 1'b0)
-//			$display("%t: output=%h",$time, outdata);
-//		if(full == 1'b0 && empty == 1'b1)
-//			$display("%t: output=%h EMPTY",$time, outdata);
-//		if(full == 1'b1 && empty == 1'b0)
-//			$display("%t: output=%h FULL",$time, outdata);
-//		if(full == 1'b1 && empty == 1'b1)
-//			$display("%t: output=%h FULL EMPTY",$time, outdata);
-//	end
-//	endtask
-//	always @(outdata, full, empty) begin
-//		print_status(outdata, full, empty);
-//	end
 
 
 
@@ -109,6 +94,7 @@ parameter TESTDEPTH=10;
 
 	task check_fifo(input shift_out, input[TESTWIDTH-1:0] outdata, input full, input empty, input[TESTWIDTH-1:0] expected_outdata, input expected_full, input expected_empty);
 	begin
+		//$display("Got output %h, expected_output %h", outdata, expected_outdata);
 		if(full === 1'b1 && empty === 1'b1)
 		begin
 			$display("%c[1;31mFIFO TEST: EMPTY and FULL at the same time.%c[0m", 27, 27);
@@ -124,7 +110,7 @@ parameter TESTDEPTH=10;
 			$display("%c[1;31mFIFO TEST: Expected empty = %b but got %b.%c[0m", 27, expected_empty, empty, 27);
 			defeat;
 		end
-		if(^expected_outdata!==1'bX && expected_empty == 1'b0 && shift_out == 1'b1 && outdata !== expected_outdata)
+		if(^expected_outdata!==1'bX && expected_empty == 1'b0 && outdata !== expected_outdata)
 		begin
 			$display("%c[1;31mFIFO TEST: Expected output = %h but got %h.%c[0m", 27, expected_outdata, outdata, 27);
 			defeat;
@@ -223,7 +209,6 @@ integer read=0;
 	#clk_period;
 	check_fifo(shift_out, outdata, full, empty, TESTVECTOR[read][TESTWIDTH-1:0], 0, 1);
 	success;
-
 
 	$display("STARTING SEMI-FULL NOP TEST:");
 	check_fifo(shift_out, outdata, full, empty, 16'hxxxx, 0, 1);
@@ -361,7 +346,7 @@ integer read=0;
 	$display("STARTING SEMI-FULL RESET TEST:");
 	write=0; // Restart the test pattern
 	read=0;
-	check_fifo(shift_out, outdata, full, empty, 16'hxxxx, 0, 1);
+	//check_fifo(shift_out, outdata, full, empty, 16'hxxxx, 0, 1);
 
 	repeat(TESTDEPTH-5)
 	begin
@@ -673,40 +658,7 @@ integer read=0;
 	check_fifo(shift_out, outdata, full, empty, {TESTWIDTH{1'bx}}, 0, 1);
 	success;
 
-
-
-
-
-
-
-
-
-	$display("END");
 	pass;
 	$finish;
-
-
-	// TODO:
-	// - Reset-operation-test for empty
-	// - Reset-operation-test for semi-full
-	// - Reset-operation-test for full
-
-
-
-
-
-	//#10
-	$finish;
 	end
-
-
-
-
-
-
-
-	//initial $monitor("%t: output: %h (%0d)", $time, outdata, value);
-
-
-
 endmodule

@@ -224,7 +224,6 @@ integer read=0;
 	check_fifo(shift_out, outdata, full, empty, TESTVECTOR[read][TESTWIDTH-1:0], 0, 1);
 	success;
 
-
 	$display("STARTING SEMI-FULL NOP TEST:");
 	check_fifo(shift_out, outdata, full, empty, 16'hxxxx, 0, 1);
 	// Half-fill the FIFO

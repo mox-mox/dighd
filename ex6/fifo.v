@@ -7,12 +7,16 @@ module fifo #(parameter WIDTH=32, parameter DEPTH=8) (input wire clk, input wire
 `include "log.v"
 parameter ADDR_SIZE = log2(DEPTH);
 parameter ADDR_MAX  = DEPTH-1;
-function incr_ptr(input[ADDR_SIZE-1:0] ptr);
+function [ADDR_SIZE-1:0]incr_ptr(input[ADDR_SIZE-1:0] ptr);
 begin
-				if(ptr == ADDR_MAX)
-					incr_ptr = {ADDR_SIZE{1'b0}};
-				else
-					incr_ptr = ptr+1;
+	if(ptr == ADDR_MAX)
+	begin
+		incr_ptr = {ADDR_SIZE{1'b0}};
+	end
+	else
+	begin
+		incr_ptr = ptr+1;
+	end
 end
 endfunction
 
@@ -30,6 +34,37 @@ begin
 end
 `endif
 //}}}
+
+`ifdef VERBOSE
+integer j;
+always @(posedge clk)
+begin
+	#1 $write("%c[1;34m%m: STATUS:", 27);
+	if(shift_in == 1'b1)
+		$write(" => %h ", wdata);
+	else
+		$write(" -> %h ", wdata);
+	//for (j = 1; j != DEPTH+1; j = j + 1)
+	//begin
+	//	if(filled[j] == 1'b1)
+	//		$write("■");
+	//	else
+	//		$write("◻");
+	//end
+	#2;
+	if(shift_out == 1'b1)
+		$write(" => %h", rdata);
+	else
+		$write(" -> %h", rdata);
+	if(full == 1'b1)
+		$write(" FULL");
+	if(empty == 1'b1)
+		$write(" EMPTY");
+	if(res_n == 1'b0)
+		$write(" RESET");
+	$display("%c[0m", 27);
+end
+`endif
 
 
 reg[ADDR_SIZE-1:0] write_ptr;
@@ -54,117 +89,46 @@ begin
 		full      <= 1'b0;
 		empty     <= 1'b1;
 	end
-	case({shift_in,shift_out})
-		2'b00: // Do nothing
-		begin
-			write_ptr <= write_ptr;
-			read_ptr  <= read_ptr;
-			full      <= full;
-			empty     <= empty;
-		end
-		2'b01: // All register stages shift one forward.
-		begin
-			if(!empty)
+	else
+	begin
+		case({shift_in,shift_out})
+			2'b00: // Do nothing
 			begin
-				read_ptr <= incr_ptr(read_ptr);
-				if(incr_ptr(read_ptr) == write_ptr)
-					empty <= 1'b1;
+				write_ptr <= write_ptr;
+				read_ptr  <= read_ptr;
+				full      <= full;
+				empty     <= empty;
 			end
-		end
-		2'b10: // Fill in a new value without shifting.
-		begin
-			if(!full)
+			2'b01: // All register stages shift one forward.
+			begin
+				if(!empty)
+				begin
+					read_ptr <= incr_ptr(read_ptr);
+					full <= 1'b0;
+					if(incr_ptr(read_ptr) == write_ptr)
+						empty <= 1'b1;
+				end
+			end
+			2'b10: // Fill in a new value without shifting.
+			begin
+				if(!full)
+				begin
+					write_ptr <= incr_ptr(write_ptr);
+					empty <= 1'b0;
+					if(incr_ptr(write_ptr) == read_ptr)
+						full <= 1'b1;
+				end
+			end
+			2'b11: // Fill and Read at the same time
 			begin
 				write_ptr <= incr_ptr(write_ptr);
-				if(incr_ptr(write_ptr) == read_ptr)
-					full <= 1'b1;
+				read_ptr <= incr_ptr(read_ptr);
+				$display("INVALID");
+				// TODO
 			end
-		end
-		2'b11: // Fill and Read at the same time
-		begin
-		end
-	endcase
+		endcase
+	end
 
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//wire[WIDTH-1:0] data [DEPTH:0];
-//wire[DEPTH+1:0] filled;
-//
-//assign full  = filled[1];
-//assign empty = !filled[DEPTH];
-//
-//`ifdef DEBUG
-//assign data[0] = {WIDTH{1'b1}}; // For debugging: If there are all ones, they must have come from here...
-//`else
-//assign data[0] = {WIDTH{1'b0}}; // ... in normal operation, zeros are more common.
-//`endif
-//assign rdata = data[DEPTH];
-//assign filled[0]       = 1'b0;
-//assign filled[DEPTH+1] = 1'b1;
-//
-//generate
-//	genvar i;
-//	for(i=0; i<DEPTH; i=i+1)
-//	begin : foobar
-//		//$display("asdf");
-//		register_stage #(.WIDTH(WIDTH)) stage_I (.clk(clk), .res_n(res_n),
-//		                                         .fill_in(wdata), .fwd_in(data[i]), .data_out(data[i+1]),
-//		                                         .shift_in(shift_in), .shift_out(shift_out),
-//		                                         .prev_filled(filled[i]), .filled(filled[i+1]), .next_filled(filled[i+2])
-//		                                        );
-//	end
-//endgenerate
-//
-//
-//
-//`ifdef VERBOSE
-//integer j;
-//always @(posedge clk)
-//begin
-//	#1
-//	$write("%c[1;34m%m: STATUS:", 27);
-//	if(shift_in == 1'b1)
-//		$write(" => %h ", wdata);
-//	else
-//		$write(" -> %h ", wdata);
-//	for (j = 1; j != DEPTH+1; j = j + 1)
-//	begin
-//		if(filled[j] == 1'b1)
-//			$write("■");
-//		else
-//			$write("◻");
-//	end
-//	if(shift_out == 1'b1)
-//		$write(" => %h", rdata);
-//	else
-//		$write(" -> %h", rdata);
-//	if(full == 1'b1)
-//		$write(" FULL");
-//	if(empty == 1'b1)
-//		$write(" EMPTY");
-//	if(res_n == 1'b0)
-//		$write(" RESET");
-//	$display("%c[0m", 27);
-//end
-//`endif
 
 endmodule
