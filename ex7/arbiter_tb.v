@@ -87,7 +87,7 @@ module arbiter_tb;
 	task check_arbiter(input res_n, input[3:0] real_grant, input[3:0] expected_grant);
 	begin
 		//$display("Got output %h, expected_output %h", outdata, expected_outdata);
-		if(res_n === 1'b1 && real_grant !== 4'b0000)
+		if(res_n === 1'b0 && real_grant !== 4'b0000)
 		begin
 			$display("%c[1;31mArbiter TEST: Arbiter is not in idle state on reset.%c[0m", 27, 27);
 			defeat;
@@ -104,11 +104,9 @@ module arbiter_tb;
 
 	//{{{ Parameters and Variables for testing
 
-	parameter TESTSTEPS=10;
+	parameter TESTSTEPS=3;
 	reg[3:0] expected_grant=4'b0000;
 	//}}}
-
-
 
 	initial begin
 	//{{{ Dump the waveform to file for reading with gtkwave.
@@ -126,8 +124,7 @@ module arbiter_tb;
 	res_n <= 1;
 	//}}}
 
-
-	$display("STARTING Idle TEST:");
+	$display("STARTING IDLE TEST:");
 	check_arbiter(res_n, grant, expected_grant);
 
 	repeat(TESTSTEPS)
@@ -137,6 +134,131 @@ module arbiter_tb;
 		check_arbiter(res_n, grant, expected_grant);
 	end
 	success;
+
+	$display("STARTING G0 TEST:");
+	check_arbiter(res_n, grant, expected_grant);
+
+	request <= 4'b0001; expected_grant <= 4'b0001;
+	#clk_period;
+	check_arbiter(res_n, grant, expected_grant);
+
+	request <= 4'b0000; expected_grant <= 4'b0000;
+	#clk_period;
+	check_arbiter(res_n, grant, expected_grant);
+
+	repeat(TESTSTEPS)
+	begin
+		request <= 4'b0001; expected_grant <= 4'b0001;
+		#clk_period;
+		check_arbiter(res_n, grant, expected_grant);
+	end
+	request <= 4'b0000; expected_grant <= 4'b0000;
+	#clk_period;
+	check_arbiter(res_n, grant, expected_grant);
+	success;
+
+	$display("STARTING G1 TEST:");
+	check_arbiter(res_n, grant, expected_grant);
+
+	request <= 4'b0010; expected_grant <= 4'b0010;
+	#clk_period;
+	check_arbiter(res_n, grant, expected_grant);
+
+	request <= 4'b0000; expected_grant <= 4'b0000;
+	#clk_period;
+	check_arbiter(res_n, grant, expected_grant);
+
+	repeat(TESTSTEPS)
+	begin
+		request <= 4'b0010; expected_grant <= 4'b0010;
+		#clk_period;
+		check_arbiter(res_n, grant, expected_grant);
+	end
+	request <= 4'b0000; expected_grant <= 4'b0000;
+	#clk_period;
+	check_arbiter(res_n, grant, expected_grant);
+	success;
+
+	$display("STARTING G2 TEST:");
+	check_arbiter(res_n, grant, expected_grant);
+
+	request <= 4'b0100; expected_grant <= 4'b0100;
+	#clk_period;
+	check_arbiter(res_n, grant, expected_grant);
+
+	request <= 4'b0000; expected_grant <= 4'b0000;
+	#clk_period;
+	check_arbiter(res_n, grant, expected_grant);
+
+	repeat(TESTSTEPS)
+	begin
+		request <= 4'b0100; expected_grant <= 4'b0100;
+		#clk_period;
+		check_arbiter(res_n, grant, expected_grant);
+	end
+	request <= 4'b0000; expected_grant <= 4'b0000;
+	#clk_period;
+	check_arbiter(res_n, grant, expected_grant);
+	success;
+
+	$display("STARTING G3 TEST:");
+	check_arbiter(res_n, grant, expected_grant);
+
+	request <= 4'b1000; expected_grant <= 4'b1000;
+	#clk_period;
+	check_arbiter(res_n, grant, expected_grant);
+
+	request <= 4'b0000; expected_grant <= 4'b0000;
+	#clk_period;
+	check_arbiter(res_n, grant, expected_grant);
+
+	repeat(TESTSTEPS)
+	begin
+		request <= 4'b1000; expected_grant <= 4'b1000;
+		#clk_period;
+		check_arbiter(res_n, grant, expected_grant);
+	end
+	request <= 4'b0000; expected_grant <= 4'b0000;
+	#clk_period;
+	check_arbiter(res_n, grant, expected_grant);
+	success;
+
+	$display("STARTING Full Sequence TEST:");
+	check_arbiter(res_n, grant, expected_grant);
+
+	repeat(TESTSTEPS)
+	begin
+		request <= 4'b1111; expected_grant <= 4'b0001;
+		#clk_period;
+		check_arbiter(res_n, grant, expected_grant);
+	end
+
+	request <= 4'b1110; expected_grant <= 4'b0010;
+	#clk_period;
+	check_arbiter(res_n, grant, expected_grant);
+
+	request <= 4'b1101; expected_grant <= 4'b0100;
+	#clk_period;
+	check_arbiter(res_n, grant, expected_grant);
+
+	request <= 4'b1111; expected_grant <= 4'b0100;
+	#clk_period;
+	check_arbiter(res_n, grant, expected_grant);
+
+	request <= 4'b1011; expected_grant <= 4'b1000;
+	#clk_period;
+	check_arbiter(res_n, grant, expected_grant);
+
+	request <= 4'b0111; expected_grant <= 4'b0001;
+	#clk_period;
+	check_arbiter(res_n, grant, expected_grant);
+	success;
+
+
+	$display("Et cetera...");
+
+
+
 
 
 
