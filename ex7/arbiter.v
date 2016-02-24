@@ -6,11 +6,11 @@ module arbiter(input wire clk, input wire res_n,
 
 // State is encoded in 'state' using modified one-hot encoding.
 reg[3:0] state;
-parameter ARBITER_IDLE = 4'b0000;
-parameter ARBITER_G0   = 4'b0001;
-parameter ARBITER_G1   = 4'b0010;
-parameter ARBITER_G2   = 4'b0100;
-parameter ARBITER_G3   = 4'b1000;
+parameter IDLE = 4'b0000;
+parameter G0   = 4'b0001;
+parameter G1   = 4'b0010;
+parameter G2   = 4'b0100;
+parameter G3   = 4'b1000;
 
 
 // All state bits constitute to the output.
@@ -21,50 +21,50 @@ assign grant = state;
 	begin
 		if (res_n == 1'b0)
 		begin // Go to idle state on reset.
-			state <= ARBITER_IDLE;
+			state <= IDLE;
 		end
 		else // posedge clk
 		begin
 			case(state)
-				ARBITER_IDLE:
+				IDLE:
 					casex(req)
-						4'b0000: state <= ARBITER_IDLE;
-						4'bxxx1: state <= ARBITER_G0;
-						4'bxx10: state <= ARBITER_G1;
-						4'bx100: state <= ARBITER_G2;
-						4'b1000: state <= ARBITER_G3;
+						4'b0000: state <= IDLE;
+						4'bxxx1: state <= G0;
+						4'bxx10: state <= G1;
+						4'bx100: state <= G2;
+						4'b1000: state <= G3;
 					endcase
-				ARBITER_G0:
+				G0:
 					casex(req)
-						4'b0000: state <= ARBITER_IDLE;
-						4'bxxx1: state <= ARBITER_G0;
-						4'bxx10: state <= ARBITER_G1;
-						4'bx100: state <= ARBITER_G2;
-						4'b1000: state <= ARBITER_G3;
+						4'b0000: state <= IDLE;
+						4'bxxx1: state <= G0;
+						4'bxx10: state <= G1;
+						4'bx100: state <= G2;
+						4'b1000: state <= G3;
 					endcase
-				ARBITER_G1:
+				G1:
 					casex(req)
-						4'b0000: state <= ARBITER_IDLE;
-						4'b0001: state <= ARBITER_G0;
-						4'bxx1x: state <= ARBITER_G1;
-						4'bx10x: state <= ARBITER_G2;
-						4'b100x: state <= ARBITER_G3;
+						4'b0000: state <= IDLE;
+						4'b0001: state <= G0;
+						4'bxx1x: state <= G1;
+						4'bx10x: state <= G2;
+						4'b100x: state <= G3;
 					endcase
-				ARBITER_G2:
+				G2:
 					casex(req)
-						4'b0000: state <= ARBITER_IDLE;
-						4'b00x1: state <= ARBITER_G0;
-						4'b0010: state <= ARBITER_G1;
-						4'bx1xx: state <= ARBITER_G2;
-						4'b10xx: state <= ARBITER_G3;
+						4'b0000: state <= IDLE;
+						4'b00x1: state <= G0;
+						4'b0010: state <= G1;
+						4'bx1xx: state <= G2;
+						4'b10xx: state <= G3;
 					endcase
-				ARBITER_G3:
+				G3:
 					casex(req)
-						4'b0000: state <= ARBITER_IDLE;
-						4'b0xx1: state <= ARBITER_G0;
-						4'b0x10: state <= ARBITER_G1;
-						4'b0100: state <= ARBITER_G2;
-						4'b1xxx: state <= ARBITER_G3;
+						4'b0000: state <= IDLE;
+						4'b0xx1: state <= G0;
+						4'b0x10: state <= G1;
+						4'b0100: state <= G2;
+						4'b1xxx: state <= G3;
 					endcase
 			endcase
 		end
